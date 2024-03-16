@@ -81,7 +81,7 @@ const NavbarGuest = () => {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 "
+                  className="block py-2 px-3 text-primaryColor rounded hover:bg-gray-100 "
                 >
                   Adopta
                 </a>
@@ -89,7 +89,7 @@ const NavbarGuest = () => {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 "
+                  className="block py-2 px-3 text-primaryColor rounded hover:bg-gray-100 "
                 >
                   Protectoras y Refugios
                 </a>
@@ -97,7 +97,7 @@ const NavbarGuest = () => {
               <li>
                 <a
                   href="#"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 "
+                  className="block py-2 px-3 text-primaryColor rounded hover:bg-gray-100 "
                 >
                   Sobre Nosotros
                 </a>
