@@ -1,5 +1,5 @@
 import React from "react";
-import LogoNav from "../../assets/images/Logo-Blanco.svg";
+import LogoFooter from "../../assets/images/Logo-Blanco.svg";
 import { FaFacebook } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
@@ -81,7 +81,7 @@ const Footer = () => {
           <div className="flex justify-between flex-wrap ">
             <span className="block text-white sm:text-center">
               © 2024{" "}
-              <a href="https://flowbite.com/" className="hover:underline">
+              <a href="" className="hover:underline">
                 Conecta Peludos
               </a>
             </span>
@@ -89,10 +89,10 @@ const Footer = () => {
               href="#"
               className="flex items-center space-x-3 rtl:space-x-reverse"
             >
-              <img src={LogoNav} className="h-16" alt="Logo" />
+              <img src={LogoFooter} className="h-16" alt="Logo" />
             </a>
             <span className="block text-sm text-white sm:text-center">
-              <a href="https://flowbite.com/" className="hover:underline"></a>
+              <a href="" className="hover:underline"></a>
               Terminos y Condiciones
             </span>
           </div>

@@ -15,6 +15,7 @@ export default {
         'disponible' : '#3FB23D',
         'acogida' : '#B08CE2',
         'adoptado' : '#22A3EB',
+        'reservado': '#F38300',
         'male' : '#8EB1E5',
         'female' : '#F672E1',
         'secondaryLetterColor':'#5F5B5B',
