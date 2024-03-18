@@ -233,15 +233,32 @@
 // };
 
 // export default FilterColumn;
-import React, { useState } from "react";
 
-const FilterColumn = ({ provinces }) => {
+
+import React, { useState, useEffect } from "react";
+import UseApi from '../../services/UseApi';
+
+const FilterColumn = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [provinces, setProvinces] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedSex, setSelectedSex] = useState("");
   const [selectedAge, setSelectedAge] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
+
+  useEffect(() => {
+    const fetchProvinces = async () => {
+      try {
+        const fetchedProvinces = await UseApi.getProvinces();
+        setProvinces(fetchedProvinces);
+      } catch (error) {
+        console.error("Error al obtener las provincias:", error);
+      }
+    };
+
+    fetchProvinces();
+  }, []);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -270,7 +287,7 @@ const FilterColumn = ({ provinces }) => {
   return (
     <>
       <button
-        className="text-white mt-2 bg-primaryColor hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 "
+        className="text-white mt-2 bg-primaryColor hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-8 "
         type="button"
         onClick={toggleDrawer}
       >
@@ -305,7 +322,6 @@ const FilterColumn = ({ provinces }) => {
           </svg>
         </button>
 
-         {/* Select para seleccionar la provincia */}
        <p className="font-bold text-lg text-center">Filtros</p>
        <p className="font-bold text-md">Provincia:</p>
        <select
@@ -314,14 +330,14 @@ const FilterColumn = ({ provinces }) => {
          className="border p-2 rounded-lg"
        >
          <option value="">Seleccionar Provincia</option>
-         {/* {provinces.map((province) => (
-           <option key={province} value={province}>
-             {province}
-           </option>
-         ))} */}
+        {provinces.map((province) => (
+          <option key={province.id} value={province.id}>
+            {province.name}
+          </option>
+        ))}
        </select>
        <hr className=" border-gray-200 " />
-       {/* Radio buttons para seleccionar el sexo */}
+      
        <div className=" flex flex-col gap-1">
          <p className="font-bold text-md">Sexo:</p>
          <div className="flex gap-1">
@@ -349,7 +365,7 @@ const FilterColumn = ({ provinces }) => {
          </div>
        </div>
        <hr className=" border-gray-200 my-2" />
-       {/* Radio buttons para seleccionar la edad */}
+       
        <div className=" flex flex-col gap-1">
          <p className="font-bold text-md">Edad:</p>
          <div className="flex gap-1">
@@ -389,7 +405,7 @@ const FilterColumn = ({ provinces }) => {
          </div>
        </div>
        <hr className=" border-gray-200 my-2" />
-       {/* Radio buttons para seleccionar el tamaño */}
+       
        <div className=" flex flex-col gap-1">
          <p className="font-bold text-md">Tamaño:</p>
          <div className="flex gap-1">
@@ -441,7 +457,7 @@ const FilterColumn = ({ provinces }) => {
          </div>
        </div>
        <hr className=" border-gray-200 my-2" />
-       {/* Radio buttons para seleccionar el estado */}
+      
        <div className=" flex flex-col gap-1">
          <p className="font-bold text-md">Estado:</p>
          <div className="flex gap-1">
@@ -510,3 +526,5 @@ const FilterColumn = ({ provinces }) => {
 };
 
 export default FilterColumn;
+
+
