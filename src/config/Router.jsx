@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
+import Categories from '../pages/GuestPages/Categories' 
 
 const AdminRoute = ({ element }) => {
     const rol = localStorage.getItem('role');
@@ -23,9 +24,9 @@ const Router = () => {
         {/* <Route path="/" element={}></Route> 
         <Route path="/register" element={}></Route>
         <Route path="/login" element={}></Route>
-        <Route path="/protectoras&refugios" element={}></Route>
-        <Route path="/categories" element={}></Route> 
-        <Route path="/provinces" element={}></Route> 
+        <Route path="/protectoras&refugios" element={}></Route> */}
+        <Route path="/categories" element={<Categories/>}></Route> 
+        {/* <Route path="/provinces" element={}></Route> 
         <Route path="/animals" element={}></Route> 
         <Route path="/animal/:id" element={}></Route>  */}
         

@@ -1,5 +1,6 @@
 import "./App.css";
 import Router from "./config/Router";
+import Footer from "./components/footer/Footer";
 
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
       <div className="flex-grow">
         <Router/>
       </div>
-  
+      <Footer/>
     </div>
   );
 }
