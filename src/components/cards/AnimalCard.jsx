@@ -6,7 +6,7 @@ import { IoLocationOutline } from "react-icons/io5";
 
 const AnimalCard = ({ animal }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const [status] = useState("Disponible"); 
+  const [status] = useState("Disponible");
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -31,20 +31,26 @@ const AnimalCard = ({ animal }) => {
 
   return (
     <>
-      <div className="relative w-[70%] md:w-1/4 lg:w-1/5 bg-white rounded overflow-hidden shadow-xl">
-        <div className={`absolute top-0 right-0 ${getStatusColor()} font-bold px-2 py-1 rounded-bl`}>
+      <div className="relative w-[70%] md:w-1/4 lg:w-1/5 bg-white rounded overflow-hidden shadow-xl cursor-pointer">
+        <div
+          className={`absolute top-0 right-0 ${getStatusColor()} font-bold px-2 py-1 rounded-bl`}
+        >
           {status}
         </div>
         <img className="w-full" src={Perro} alt="animal" />
-        <div className="px-3 py-4">
-          <div className="font-bold text-secondaryLetterColor lg:text-lg text-xl mb-2">Toby</div>
+        <div className="px-3 py-4 ">
+          <div className="font-bold text-secondaryLetterColor lg:text-lg text-xl mb-2">
+            Toby
+          </div>
           <div className="flex justify-between flex-wrap">
             <div className="flex items-baseline">
               <IoLocationOutline className="p-0" />
-              <p className=" text-secondaryLetterColor lg:text-xs text-sm">Castilla y Leon </p>
+              <p className=" text-secondaryLetterColor lg:text-xs text-sm">
+                Castilla y Leon{" "}
+              </p>
             </div>
             <div className="flex items-baseline gap-2">
-              <IoMdMale className="text-blue-800 lg:size-6 size-8 bg-male rounded-full p-1"/>
+              <IoMdMale className="text-blue-800 lg:size-6 size-8 bg-male rounded-full p-1" />
               <span
                 className="cursor-pointer text-gray-700 text-xl"
                 role="img"
@@ -96,6 +102,7 @@ const AnimalCard = ({ animal }) => {
           </div>
         </div>
       </div> */}
+
     </>
   );
 };

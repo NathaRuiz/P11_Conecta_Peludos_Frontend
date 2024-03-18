@@ -2,6 +2,9 @@ import React from 'react'
 import NavbarUser from '../../components/navbars/NavbarGuest'
 import AnimalCard from '../../components/cards/AnimalCard'
 import ShelterCard from '../../components/cards/ShelterCard'
+import ShelterAnimalCard from '../../components/cards/ShelterAnimalCard'
+import AnimalPrimaryInfo from '../../components/cards/AnimalPrimaryInfo'
+import AnimalSecondaryInfo from '../../components/cards/AnimalSecondaryInfo'
 
 const Categories = () => {
   return (
@@ -15,6 +18,9 @@ const Categories = () => {
     <AnimalCard/>
     <AnimalCard/>
     <ShelterCard></ShelterCard>
+    <ShelterAnimalCard></ShelterAnimalCard> 
+    <AnimalPrimaryInfo></AnimalPrimaryInfo>
+    <AnimalSecondaryInfo></AnimalSecondaryInfo>
     </div>
     
     </>
