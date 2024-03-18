@@ -1,13 +1,16 @@
 import "./App.css";
-import Categories from "./pages/GuestPages/Categories";
+import Router from "./config/Router";
 
 
 function App() {
  
   return (
-    <>
-   <Categories></Categories>
-    </>
+    <div className="flex flex-col min-h-screen">
+      <div className="flex-grow">
+        <Router/>
+      </div>
+  
+    </div>
   );
 }
 
