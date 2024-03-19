@@ -2,36 +2,38 @@ import React from "react";
 import LogoNav from "../../assets/images/Logo-Azul.svg";
 import { IoLocationOutline } from "react-icons/io5";
 
+const ShelterAnimalCard = ({ shelter, province }) => {
+  const backgroundColor = shelter && shelter.type === "Protectora" ? "bg-tertiaryColor" : "bg-quarteryColor";
 
-const ShelterAnimalCard = ({ type="Refugio" }) => {
-    const backgroundColor = type === "Protectora" ? "bg-tertiaryColor" : "bg-quarteryColor";
-
-    return (
-      <>
-        <div className="w-[70%] md:w-1/4 lg:w-1/5 bg-white rounded-xl overflow-hidden shadow-xl">
-          <img className="w-full" src={LogoNav} alt="animal" />
-          <div className="px-3 py-5">
+  return (
+    <>
+      {shelter && province && (
+        <div className="w-[80%] md:w-1/4 lg:w-1/5 bg-white rounded-xl overflow-hidden shadow-xl">
+          <img className="w-full" src={shelter.image_url} alt="animal" />
+          <div className="px-3 py-2">
             <div className="font-bold text-secondaryLetterColor text-lg mb-2">
-              Toby
+              {shelter.name}
             </div>
-              <div className="flex items-baseline">
-                <IoLocationOutline className="p-0" />
-                <p className=" text-secondaryLetterColor lg:text-xs text-sm">Pamplona</p>
-              </div>
+            <div className="flex items-baseline">
+              <IoLocationOutline className="p-0" />
+              <p className="text-secondaryLetterColor lg:text-xs text-sm">{province.name}</p>
+            </div>
             <div className="flex justify-between mt-1 flex-wrap">
               <div className="flex items-baseline gap-2">
                 <span className={`rounded-full px-3 py-1 lg:text-xs text-sm font-semibold text-primaryColor ${backgroundColor}`}>
-                  {type}
+                  {shelter.type}
                 </span>
               </div>
-             <a href="" className="rounded-full px-3 py-1 lg:text-xs text-sm font-semibold text-white bg-primaryColor">
+              <a href="" className="rounded-full px-3 py-1 lg:text-xs text-sm font-semibold text-white bg-primaryColor">
                 Explora más
-             </a>
+              </a>
             </div>
           </div>
         </div>
-      </>
-    );
+      )}
+    </>
+  );
 }
+
 
 export default ShelterAnimalCard

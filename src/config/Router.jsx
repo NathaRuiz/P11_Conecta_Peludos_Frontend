@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
 import Adopta from '../pages/GuestPages/Adopta' 
+import Inicio from "../pages/GuestPages/Inicio";
+import InfoAnimal from "../pages/GuestPages/InfoAnimal";
 
 const AdminRoute = ({ element }) => {
     const rol = localStorage.getItem('role');
@@ -21,14 +23,14 @@ const Router = () => {
     <BrowserRouter>
     <Routes>
         {/* Rutas publicas */}
-        {/* <Route path="/" element={}></Route> 
-        <Route path="/register" element={}></Route>
+        <Route path="/" element={<Inicio/>}></Route> 
+        {/* <Route path="/register" element={}></Route>
         <Route path="/login" element={}></Route>
         <Route path="/protectoras&refugios" element={}></Route> */}
         <Route path="/adopta" element={<Adopta/>}></Route> 
         {/* <Route path="/provinces" element={}></Route> 
-        <Route path="/animals" element={}></Route> 
-        <Route path="/animal/:id" element={}></Route>  */}
+        <Route path="/animals" element={}></Route>  */}
+        <Route path="/animal/:id" element={<InfoAnimal/>}></Route> 
         
         {/* Rutas protegidas para Shelter*/}
         

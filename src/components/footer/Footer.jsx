@@ -8,7 +8,7 @@ import { IoLogoYoutube } from "react-icons/io";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-white rounded-lg shadow dark:bg-gray-900">
+      <footer className="bg-white rounded-lg shadow dark:bg-gray-900 mt-2">
         <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
             <ul className="flex flex-wrap gap-4 md:p-0 mt-2 mb-2 font-medium md:space-x-4 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">

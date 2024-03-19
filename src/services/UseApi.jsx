@@ -12,9 +12,32 @@ const UseApi = {
     }
   },
 
+  async register(userData) {
+    try {
+      const response = await axios.post(`${apiUrl}/register`, userData);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async logout(token) {
+    try {
+      const response = await axios.post(`${apiUrl}/logout`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+
   async getShelters() {
     try {
-      const response = await axios.get(`${apiUrl}/protectoras&refugios`);
+      const response = await axios.get(`${apiUrl}/shelters`);
       return response.data;
     } catch (error) {
       console.error("Error al obtener Protectoras y Refugios:", error);
