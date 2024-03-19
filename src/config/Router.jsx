@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
 import Adopta from '../pages/GuestPages/Adopta' 
 import Inicio from "../pages/GuestPages/Inicio";
 import InfoAnimal from "../pages/GuestPages/InfoAnimal";
+import InfoShelter from "../pages/GuestPages/InfoShelter";
 
 const AdminRoute = ({ element }) => {
     const rol = localStorage.getItem('role');
@@ -31,7 +32,7 @@ const Router = () => {
         {/* <Route path="/provinces" element={}></Route> 
         <Route path="/animals" element={}></Route>  */}
         <Route path="/animal/:id" element={<InfoAnimal/>}></Route> 
-        
+        <Route path="/shelter/:id" element={<InfoShelter/>}></Route> 
         {/* Rutas protegidas para Shelter*/}
         
         {/* Rutas protegidas para User*/}

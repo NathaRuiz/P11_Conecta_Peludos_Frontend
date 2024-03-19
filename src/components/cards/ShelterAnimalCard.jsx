@@ -1,5 +1,5 @@
 import React from "react";
-import LogoNav from "../../assets/images/Logo-Azul.svg";
+import { Link } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 
 const ShelterAnimalCard = ({ shelter, province }) => {
@@ -8,7 +8,7 @@ const ShelterAnimalCard = ({ shelter, province }) => {
   return (
     <>
       {shelter && province && (
-        <div className="w-[80%] md:w-1/4 lg:w-1/5 bg-white rounded-xl overflow-hidden shadow-xl">
+        <Link  to={`/shelter/${shelter.id}`} className="w-[80%] md:w-1/4 lg:w-1/5 bg-white rounded-xl overflow-hidden shadow-xl">
           <img className="w-full" src={shelter.image_url} alt="animal" />
           <div className="px-3 py-2">
             <div className="font-bold text-secondaryLetterColor text-lg mb-2">
@@ -29,7 +29,7 @@ const ShelterAnimalCard = ({ shelter, province }) => {
               </a>
             </div>
           </div>
-        </div>
+        </Link>
       )}
     </>
   );
