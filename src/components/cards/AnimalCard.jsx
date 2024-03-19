@@ -13,7 +13,7 @@ const AnimalCard = ({ animal }) => {
   };
 
   const getStatusColor = () => {
-    switch (status) {
+    switch (animal.status) {
       case "Disponible":
         return "bg-disponible text-primaryColor";
       case "En Acogida":
@@ -29,28 +29,34 @@ const AnimalCard = ({ animal }) => {
     }
   };
 
+ 
+
   return (
     <>
       <div className="relative w-[70%] md:w-1/4 lg:w-1/5 bg-white rounded overflow-hidden shadow-xl cursor-pointer">
         <div
           className={`absolute top-0 right-0 ${getStatusColor()} font-bold px-2 py-1 rounded-bl`}
         >
-          {status}
+          {animal.status}
         </div>
-        <img className="w-full" src={Perro} alt="animal" />
+        <img className="w-full" src={animal.image_url} alt="animal" />
         <div className="px-3 py-4 ">
           <div className="font-bold text-secondaryLetterColor lg:text-lg text-xl mb-2">
-            Toby
+            {animal.name}
           </div>
           <div className="flex justify-between flex-wrap">
             <div className="flex items-baseline">
               <IoLocationOutline className="p-0" />
-              <p className=" text-secondaryLetterColor lg:text-xs text-sm">
-                Castilla y Leon{" "}
+              <p className="text-secondaryLetterColor lg:text-xs text-sm">
+                provincia
               </p>
             </div>
-            <div className="flex items-baseline gap-2">
-              <IoMdMale className="text-blue-800 lg:size-6 size-8 bg-male rounded-full p-1" />
+            <div className="flex items-center gap-2">
+              {animal.gender === "Macho" ? (
+                <IoMdMale className="text-blue-800 size-6 bg-male rounded-full p-1" />
+              ) : (
+                <IoMdFemale className="text-pink-600 size-6 bg-female rounded-full p-1" />
+              )}
               <span
                 className="cursor-pointer text-gray-700 text-xl"
                 role="img"
@@ -102,7 +108,6 @@ const AnimalCard = ({ animal }) => {
           </div>
         </div>
       </div> */}
-
     </>
   );
 };
