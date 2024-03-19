@@ -84,6 +84,26 @@ const UseApi = {
       return null;
     }
   },
+
+  async getAnimalDataById(id) {
+    try {
+      const response = await axios.get(`${apiUrl}/animal/${id}/data`);
+      return response.data;
+    } catch (error) {
+      console.error("Error al obtener animal por ID:", error);
+      return null;
+    }
+  },
+
+  async getShelterDataById(id) {
+    try {
+      const response = await axios.get(`${apiUrl}/shelter/${id}/data`);
+      return response.data;
+    } catch (error) {
+      console.error("Error al obtener al shelter por ID:", error);
+      return null;
+    }
+  },
 };
 
 export default UseApi;

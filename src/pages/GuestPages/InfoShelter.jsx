@@ -11,8 +11,7 @@ import Search from "../../components/search/Search";
 
 const InfoShelter = () => {
   const { id } = useParams();
-  const [shelter, setShelter] = useState(null);
-  const [province, setProvince] = useState(null);
+  const [shelterData, setShelterData] = useState(null);
   const [animals, setAnimals] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchText, setSearchText] = useState("");
@@ -22,36 +21,17 @@ const InfoShelter = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Obtener todos los refugios
-        const allShelters = await UseApi.getShelters();
-        console.log("Todos los refugios:", allShelters);
+        const shelterData = await UseApi.getShelterDataById(id);
+        setShelterData(shelterData);
 
-        const shelters = await UseApi.getShelters();
-        // Convertir el ID a tipo numérico
-        const shelterId = parseInt(id, 10);
-        // Encontrar el refugio con el ID proporcionado en los parámetros de la URL
-        const shelterOfInterest = shelters.find((s) => s.id === shelterId);
-        setShelter(shelterOfInterest);
-
-        const allProvinces = await UseApi.getProvinces();
-        console.log("Todas las provincias:", allProvinces);
-
-        if (shelterOfInterest) {
-          // Obtener la provincia del refugio
-          const allProvinces = await UseApi.getProvinces();
-          console.log("Todas las provincias:", allProvinces);
-          const provinceOfShelter = allProvinces.find(
-            (province) => province.id === shelterOfInterest.province_id
-          );
-          console.log("Provincia del refugio:", provinceOfShelter);
-          setProvince(provinceOfShelter);
+        if (shelterData) {
           // Obtener todos los animales
           const allAnimals = await UseApi.getAnimals();
           console.log("Todos los animales:", allAnimals);
 
           // Filtrar los animales que pertenecen a este refugio
           const shelterAnimals = allAnimals.filter(
-            (animal) => animal.user_id === shelterId
+            (animal) => animal.user_id === shelterData.shelter.id
           );
           console.log("Animales del refugio:", shelterAnimals);
 
@@ -110,16 +90,18 @@ const InfoShelter = () => {
     <div className="lg:mt-[100px] gap-1 mt-[120px]">
       <NavbarGuest />
      
-        {shelter && province && (
+        {shelterData ? (
           <div className="flex flex-wrap  w-[90%] justify-around items-stretch m-auto">
             <img
-              src={shelter.image_url}
-              alt={shelter.name}
+              src={shelterData.shelter.image_url}
+              alt={shelterData.shelter.name}
               className="lg:w-[22%] w-full rounded-lg"
             />
-            <ShelterInfoCard shelter={shelter} province={province} />
+            <ShelterInfoCard shelter={shelterData.shelter} province={shelterData.province} />
           </div>
-        )}
+        ) : (
+            <p>Cargando información de la protectora o refugio...</p>
+          )}
         <div className="w-[70%] m-auto">
           <AnimalCategoryCard
             onSelectCategory={setSelectedCategory}

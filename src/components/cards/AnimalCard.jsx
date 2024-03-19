@@ -7,33 +7,20 @@ import UseApi from "../../services/UseApi";
 
 const AnimalCard = ({ animal }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const [status] = useState("Disponible");
-  const [province, setProvince] = useState(null);
+  const [shelterData, setShelterData] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchShelterData = async () => {
       try {
-        // Obtener el refugio asociado al animal
-        const shelters = await UseApi.getShelters();
-        const shelterOfAnimal = shelters.find(
-          (user) => user.id === animal.user_id
-        );
-
-        if (shelterOfAnimal) {
-          // Obtener la provincia asociada al refugio
-          const provinces = await UseApi.getProvinces();
-          const provinceOfShelter = provinces.find(
-            (province) => province.id === shelterOfAnimal.province_id
-          );
-          setProvince(provinceOfShelter);
-        }
+        const fetchedData = await UseApi.getShelterDataById(animal.user_id);
+        setShelterData(fetchedData);
       } catch (error) {
-        console.error("Error al obtener información:", error);
+        console.error("Error al obtener información del refugio:", error);
       }
     };
 
-    fetchData();
-  }, [animal]);
+    fetchShelterData();
+  }, [animal.user_id]);
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -75,7 +62,7 @@ const AnimalCard = ({ animal }) => {
           <div className="flex items-center">
             <IoLocationOutline className="text-secondaryLetterColor" />
             <p className="text-secondaryLetterColor lg:text-xs text-sm">
-              {province ? province.name : "Cargando..."}{" "}
+              {shelterData && shelterData.province && shelterData.province.name}
             </p>
           </div>
           <div className="flex items-center gap-2">
