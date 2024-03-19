@@ -7,6 +7,10 @@ import FilterColumn from "../../components/filter/FilterColumn";
 import AnimalCategoryCard from "../../components/cards/AnimalCategoryCard";
 import Pagination from "../../components/pagination/Pagination";
 import Search from '../../components/search/Search';
+import BannerAmigoMasD from '../../assets/images/Banner-UnAmigo-Desktop.svg'
+import BannerAmigoMasM from '../../assets/images/Banner-UnAmigo-Mobile.svg'
+import { useMediaQuery } from 'react-responsive';
+
 
 const Adopta = () => {
   const [animals, setAnimals] = useState([]);
@@ -14,12 +18,12 @@ const Adopta = () => {
   const [searchText, setSearchText] = useState(''); 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const itemsPerPage = 6;
-  const { id: categoryId } = useParams(); 
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
   useEffect(() => {
     const fetchAnimals = async () => {
       try {
-        const fetchedAnimals = await UseApi.getAnimals(); // Obtener todos los animales sin filtrar por categoría
+        const fetchedAnimals = await UseApi.getAnimals(); 
         setAnimals(fetchedAnimals);
       } catch (error) {
         console.error("Error al obtener los animales:", error);
@@ -29,7 +33,6 @@ const Adopta = () => {
     fetchAnimals();
   }, []);
   
-  // Función para filtrar animales por categoría
   const filterByCategory = (animal) => {
     // Si no hay una categoría seleccionada, retornar true para incluir todos los animales
     if (!selectedCategory) {
@@ -47,7 +50,7 @@ const Adopta = () => {
   };
   
   const handleSearchChange = (e) => {
-    setSearchText(e.target.value.toLowerCase()); // Convertir el texto a minúsculas
+    setSearchText(e.target.value.toLowerCase()); 
   };
   
   // Filtrar los animales según el texto de búsqueda
@@ -68,6 +71,7 @@ const Adopta = () => {
   // Obtener los animales de la página actual
   const currentAnimals = filteredAnimals.slice(startIndex, endIndex);
 
+  
   return (
     <>
       <div className="mt-[120px] lg:mt-[100px] flex flex-col gap-2">
@@ -90,6 +94,21 @@ const Adopta = () => {
             itemsPerPage={itemsPerPage} 
             onPageChange={handlePageChange} 
           />
+        </div>
+        <div>
+          {isMobile ? (
+            <img
+              src={BannerAmigoMasM}
+              alt="Banner"
+              className="w-full h-auto m-auto"
+            />
+          ) : (
+            <img
+              src={BannerAmigoMasD}
+              alt="Banner"
+              className="w-[90%] h-auto m-auto"
+            />
+          )}
         </div>
       </div>
     </>

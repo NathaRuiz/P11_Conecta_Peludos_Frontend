@@ -55,7 +55,7 @@ const AnimalCategoryCard = ({ onSelectCategory, selectedCategory }) => {
       <div className="flex flex-wrap justify-around gap-y-2">
         <div
           onClick={() => onSelectCategory(null)}
-          className={` shadow-2xl flex flex-col items-center justify-center mx-2 lg:w-1/12 rounded-lg py-1 cursor-pointer ${selectedCategory === null ? 'bg-tertiaryColor text-primaryColor' : 'bg-white'}`}
+          className={`hover:bg-tertiaryColor shadow-2xl flex flex-col items-center justify-center mx-2 lg:w-1/12 rounded-lg py-1 cursor-pointer ${selectedCategory === null ? 'bg-tertiaryColor text-primaryColor' : 'bg-white'}`}
         >
           <img
             src={Huella}
@@ -68,7 +68,7 @@ const AnimalCategoryCard = ({ onSelectCategory, selectedCategory }) => {
           <div
             key={category.id}
             onClick={() => onSelectCategory(category.id)}
-            className={` shadow-2xl flex flex-col items-center justify-center mx-2 lg:w-1/12 rounded-lg py-1 cursor-pointer text-primaryColor ${getCategoryStyle(category.id)}`}
+            className={`hover:bg-tertiaryColor shadow-2xl flex flex-col items-center justify-center mx-2 lg:w-1/12 rounded-lg py-1 cursor-pointer text-primaryColor ${getCategoryStyle(category.id)}`}
           >
             <img
               src={getImageByCategory(category)}
