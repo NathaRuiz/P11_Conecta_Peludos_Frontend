@@ -42,7 +42,7 @@ const InfoAnimal = () => {
         <div className="lg:mt-[100px] gap-1 mt-[120px]">
           <div className="flex flex-wrap  w-[90%] justify-around items-start m-auto">
             <img src={animal.image_url} alt={animal.name} className="lg:w-[22%] w-full rounded-lg" />
-            <AnimalPrimaryInfo animal={animal} />
+            <AnimalPrimaryInfo animal={animal}  province={province}/>
           </div>
           <div className="flex flex-wrap gap-3 w-[91%] justify-around items-strech m-auto lg:gap-0">
             <AnimalSecondaryInfo animal={animal} />

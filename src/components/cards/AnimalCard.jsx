@@ -1,13 +1,39 @@
-import React, { useState } from "react";
-import Perro from "../../assets/images/Perro.svg";
+import React, { useState, useEffect } from "react";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { IoMdFemale, IoMdMale } from "react-icons/io";
 import { IoLocationOutline } from "react-icons/io5";
-import { Link } from "react-router-dom"; // 
+import { Link } from "react-router-dom";
+import UseApi from "../../services/UseApi";
 
 const AnimalCard = ({ animal }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [status] = useState("Disponible");
+  const [province, setProvince] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Obtener el refugio asociado al animal
+        const shelters = await UseApi.getShelters();
+        const shelterOfAnimal = shelters.find(
+          (user) => user.id === animal.user_id
+        );
+
+        if (shelterOfAnimal) {
+          // Obtener la provincia asociada al refugio
+          const provinces = await UseApi.getProvinces();
+          const provinceOfShelter = provinces.find(
+            (province) => province.id === shelterOfAnimal.province_id
+          );
+          setProvince(provinceOfShelter);
+        }
+      } catch (error) {
+        console.error("Error al obtener información:", error);
+      }
+    };
+
+    fetchData();
+  }, [animal]);
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -30,49 +56,50 @@ const AnimalCard = ({ animal }) => {
     }
   };
 
- 
-
   return (
-    <Link to={`/animal/${animal.id}`} className="relative w-[70%] md:w-1/4 lg:w-1/5 bg-white rounded overflow-hidden shadow-xl cursor-pointer">
-      
-        <div
-          className={`absolute top-0 right-0 ${getStatusColor()} font-bold px-2 py-1 rounded-bl`}
-        >
-          {animal.status}
+    <Link
+      to={`/animal/${animal.id}`}
+      className="relative w-[70%] md:w-1/4 lg:w-1/5 bg-white rounded overflow-hidden shadow-xl cursor-pointer"
+    >
+      <div
+        className={`absolute top-0 right-0 ${getStatusColor()} font-bold px-2 py-1 rounded-bl`}
+      >
+        {animal.status}
+      </div>
+      <img className="w-full" src={animal.image_url} alt="animal" />
+      <div className="px-3 py-4 ">
+        <div className="font-bold text-secondaryLetterColor lg:text-lg text-xl mb-2">
+          {animal.name}
         </div>
-        <img className="w-full" src={animal.image_url} alt="animal" />
-        <div className="px-3 py-4 ">
-          <div className="font-bold text-secondaryLetterColor lg:text-lg text-xl mb-2">
-            {animal.name}
+        <div className="flex justify-between flex-wrap">
+          <div className="flex items-baseline">
+            <IoLocationOutline className="p-0" />
+            <p className="text-secondaryLetterColor lg:text-xs text-sm">
+              {province ? province.name : "Unknown"}{" "}
+              {/* Mostrar el nombre de la provincia o "Unknown" si no está disponible */}
+            </p>
           </div>
-          <div className="flex justify-between flex-wrap">
-            <div className="flex items-baseline">
-              <IoLocationOutline className="p-0" />
-              <p className="text-secondaryLetterColor lg:text-xs text-sm">
-                province
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              {animal.gender === "Macho" ? (
-                <IoMdMale className="text-blue-800 size-6 bg-male rounded-full p-1" />
+          <div className="flex items-center gap-2">
+            {animal.gender === "Macho" ? (
+              <IoMdMale className="text-blue-800 size-6 bg-male rounded-full p-1" />
+            ) : (
+              <IoMdFemale className="text-pink-600 size-6 bg-female rounded-full p-1" />
+            )}
+            <span
+              className="cursor-pointer text-gray-700 text-xl"
+              role="img"
+              aria-label="Favorite"
+              onClick={toggleFavorite}
+            >
+              {isFavorite ? (
+                <MdFavorite className="text-secondaryColor size-8 lg:size-6" /> // Corazón relleno
               ) : (
-                <IoMdFemale className="text-pink-600 size-6 bg-female rounded-full p-1" />
+                <MdFavoriteBorder className="size-8 lg:size-6" /> // Corazón sin relleno
               )}
-              <span
-                className="cursor-pointer text-gray-700 text-xl"
-                role="img"
-                aria-label="Favorite"
-                onClick={toggleFavorite}
-              >
-                {isFavorite ? (
-                  <MdFavorite className="text-secondaryColor size-8 lg:size-6" /> // Corazón relleno
-                ) : (
-                  <MdFavoriteBorder className="size-8 lg:size-6" /> // Corazón sin relleno
-                )}
-              </span>
-            </div>
+            </span>
           </div>
         </div>
+      </div>
     </Link>
   );
 };

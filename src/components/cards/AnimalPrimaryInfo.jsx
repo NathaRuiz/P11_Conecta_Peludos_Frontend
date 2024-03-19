@@ -1,7 +1,7 @@
 import React from "react";
 import { IoLocationOutline } from "react-icons/io5";
 
-const AnimalPrimaryInfo = ({ animal }) => {
+const AnimalPrimaryInfo = ({ animal, province }) => {
   const getStatusColor = () => {
     switch (animal.status) {
       case "Disponible":
@@ -36,9 +36,11 @@ const AnimalPrimaryInfo = ({ animal }) => {
           </div>
           <div className="flex items-baseline">
             <IoLocationOutline className="p-0" />
-            <p className=" text-secondaryLetterColor lg:text-xs text-sm">
-              {animal.location}
-            </p>
+            {province && province.name && ( 
+              <p className=" text-secondaryLetterColor lg:text-xs text-sm">
+                {province.name}
+              </p>
+            )}
           </div>
         </div>
 
