@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import UseApi from '../../services/UseApi';
-import NavbarUser from "../../components/navbars/NavbarGuest";
+import NavbarGuest from "../../components/navbars/NavbarGuest";
 import AnimalCard from "../../components/cards/AnimalCard";
 import FilterColumn from "../../components/filter/FilterColumn";
 import AnimalCategoryCard from "../../components/cards/AnimalCategoryCard";
@@ -75,7 +75,7 @@ const Adopta = () => {
   return (
     <>
       <div className="mt-[120px] lg:mt-[100px] flex flex-col gap-2">
-        <NavbarUser />
+        <NavbarGuest />
         <div className="w-[70%] m-auto">
           <AnimalCategoryCard onSelectCategory={setSelectedCategory} selectedCategory={selectedCategory} />
         </div>

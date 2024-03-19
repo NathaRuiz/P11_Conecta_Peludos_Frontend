@@ -72,11 +72,10 @@ const AnimalCard = ({ animal }) => {
           {animal.name}
         </div>
         <div className="flex justify-between flex-wrap">
-          <div className="flex items-baseline">
-            <IoLocationOutline className="p-0" />
+          <div className="flex items-center">
+            <IoLocationOutline className="text-secondaryLetterColor" />
             <p className="text-secondaryLetterColor lg:text-xs text-sm">
-              {province ? province.name : "Unknown"}{" "}
-              {/* Mostrar el nombre de la provincia o "Unknown" si no está disponible */}
+              {province ? province.name : "Cargando..."}{" "}
             </p>
           </div>
           <div className="flex items-center gap-2">

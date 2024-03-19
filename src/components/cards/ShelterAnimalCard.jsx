@@ -14,8 +14,8 @@ const ShelterAnimalCard = ({ shelter, province }) => {
             <div className="font-bold text-secondaryLetterColor text-lg mb-2">
               {shelter.name}
             </div>
-            <div className="flex items-baseline">
-              <IoLocationOutline className="p-0" />
+            <div className="flex items-center">
+              <IoLocationOutline className="text-secondaryLetterColor" />
               <p className="text-secondaryLetterColor lg:text-xs text-sm">{province.name}</p>
             </div>
             <div className="flex justify-between mt-1 flex-wrap">

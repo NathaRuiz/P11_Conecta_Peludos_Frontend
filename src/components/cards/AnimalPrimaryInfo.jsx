@@ -34,8 +34,8 @@ const AnimalPrimaryInfo = ({ animal, province }) => {
           <div className={`${backgroundColor} text-sm  font-bold px-2 py-0 rounded-xl`}>
             {animal.gender}
           </div>
-          <div className="flex items-baseline">
-            <IoLocationOutline className="p-0" />
+          <div className="flex items-center">
+            <IoLocationOutline className="text-secondaryLetterColor" />
             {province && province.name && ( 
               <p className=" text-secondaryLetterColor lg:text-xs text-sm">
                 {province.name}
