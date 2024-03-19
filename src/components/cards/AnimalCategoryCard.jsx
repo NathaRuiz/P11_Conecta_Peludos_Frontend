@@ -60,7 +60,7 @@ const AnimalCategoryCard = ({ onSelectCategory, selectedCategory }) => {
           <img
             src={Huella}
             alt="Huella"
-            className="w-auto h-auto object-cover"
+            className="w-auto h-auto object-cover "
           />
           <p className="mt-2 text-sm font-medium">Todos</p>
         </div>
@@ -73,7 +73,7 @@ const AnimalCategoryCard = ({ onSelectCategory, selectedCategory }) => {
             <img
               src={getImageByCategory(category)}
               alt={category.name}
-              className="w-[90%] h-auto object-cover"
+              className="w-[90%] h-auto object-cover "
             />
             <p className="mt-2 text-sm font-medium">{category.name}</p>
           </div>

@@ -83,7 +83,7 @@ const NavbarGuest = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/nosotros" className="block py-2 px-3 text-primaryColor rounded hover:bg-gray-100 ">
+                <Link to="/sobreNosotros" className="block py-2 px-3 text-primaryColor rounded hover:bg-gray-100 ">
                   Sobre Nosotros
                 </Link>
               </li>

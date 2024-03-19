@@ -53,7 +53,7 @@ const AnimalCard = ({ animal }) => {
       >
         {animal.status}
       </div>
-      <img className="w-full" src={animal.image_url} alt="animal" />
+      <img className="w-full" src={animal.image_url} alt={animal.name} />
       <div className="px-3 py-4 ">
         <div className="font-bold text-secondaryLetterColor lg:text-lg text-xl mb-2">
           {animal.name}

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import UseApi from "../../services/UseApi";
-import NavbarGuest from "../../components/navbars/NavbarGuest";
-import ShelterInfoCard from "../../components/cards/ShelterInfoCard"; // Importa la tarjeta del refugio
+import ShelterInfoCard from "../../components/cards/ShelterInfoCard"; 
 import AnimalCard from "../../components/cards/AnimalCard";
 import Pagination from "../../components/pagination/Pagination";
 import FilterColumn from "../../components/filter/FilterColumn";
@@ -88,8 +87,6 @@ const InfoShelter = () => {
 
   return (
     <div className="lg:mt-[100px] gap-1 mt-[120px]">
-      <NavbarGuest />
-     
         {shelterData ? (
           <div className="flex flex-wrap  w-[90%] justify-around items-stretch m-auto">
             <img

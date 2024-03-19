@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import UseApi from "../../services/UseApi";
-import NavbarGuest from "../../components/navbars/NavbarGuest";
 import AnimalPrimaryInfo from "../../components/cards/AnimalPrimaryInfo";
 import AnimalSecondaryInfo from "../../components/cards/AnimalSecondaryInfo";
 import ShelterAnimalCard from "../../components/cards/ShelterAnimalCard";
@@ -25,7 +24,7 @@ const InfoAnimal = () => {
 
   return (
     <div className="my-3">
-      <NavbarGuest />
+      
       {animalData ? (
         <div className="lg:mt-[100px] gap-1 mt-[120px]">
           <div className="flex flex-wrap  w-[90%] justify-around items-start m-auto">

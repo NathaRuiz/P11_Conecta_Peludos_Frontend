@@ -75,11 +75,11 @@ const Adopta = () => {
   return (
     <>
       <div className="mt-[120px] lg:mt-[100px] flex flex-col gap-2">
-        <NavbarGuest />
+        
         <div className="w-[70%] m-auto">
           <AnimalCategoryCard onSelectCategory={setSelectedCategory} selectedCategory={selectedCategory} />
         </div>
-          <div className="flex flex-wrap justify-center mt-4 gap-8 ">
+          <div className="flex flex-wrap mt-4 w-[70%] m-auto justify-center lg:justify-normal">
           <Search onSearchChange={handleSearchChange} />
           <FilterColumn />
           </div>

@@ -3,6 +3,8 @@ import Adopta from '../pages/GuestPages/Adopta'
 import Inicio from "../pages/GuestPages/Inicio";
 import InfoAnimal from "../pages/GuestPages/InfoAnimal";
 import InfoShelter from "../pages/GuestPages/InfoShelter";
+import Shelters from "../pages/GuestPages/Shelters";
+import NavbarGuest from "../components/navbars/NavbarGuest";
 
 const AdminRoute = ({ element }) => {
     const rol = localStorage.getItem('role');
@@ -24,15 +26,14 @@ const Router = () => {
     <BrowserRouter>
     <Routes>
         {/* Rutas publicas */}
-        <Route path="/" element={<Inicio/>}></Route> 
+        <Route path="/" element={<><NavbarGuest/> <Inicio/></>}></Route> 
         {/* <Route path="/register" element={}></Route>
-        <Route path="/login" element={}></Route>
-        <Route path="/protectoras&refugios" element={}></Route> */}
-        <Route path="/adopta" element={<Adopta/>}></Route> 
-        {/* <Route path="/provinces" element={}></Route> 
-        <Route path="/animals" element={}></Route>  */}
-        <Route path="/animal/:id" element={<InfoAnimal/>}></Route> 
-        <Route path="/shelter/:id" element={<InfoShelter/>}></Route> 
+        <Route path="/login" element={}></Route> */}
+        <Route path="/protectoras&refugios" element={<><NavbarGuest/><Shelters/></>}></Route>
+        <Route path="/adopta" element={<><NavbarGuest/><Adopta/></>}></Route> 
+        <Route path="/sobreNosotros" element={<><NavbarGuest/><Inicio/></>}></Route> 
+        <Route path="/animal/:id" element={<><NavbarGuest/><InfoAnimal/></>}></Route> 
+        <Route path="/shelter/:id" element={<><NavbarGuest/><InfoShelter/></>}></Route> 
         {/* Rutas protegidas para Shelter*/}
         
         {/* Rutas protegidas para User*/}
