@@ -1,12 +1,11 @@
 import React from 'react'
 
-
-const Inicio = () => {
+const AboutUs = () => {
   return (
     <div className="mt-[120px] lg:mt-[100px] flex flex-col gap-2">
-       Inicio
+        AboutUs
     </div>
   )
 }
 
-export default Inicio
+export default AboutUs

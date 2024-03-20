@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // Importar el componente Link de react-router-dom
+import { Link } from "react-router-dom"; 
 import LogoNav from '../../assets/images/Logo-Azul.svg';
 import PrimaryBtn from "../buttons/PrimaryBtn";
 import SecondaryBtn from "../buttons/SecondaryBtn";

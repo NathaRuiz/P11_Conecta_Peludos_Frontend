@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import UseApi from '../../services/UseApi';
-import NavbarGuest from "../../components/navbars/NavbarGuest";
 import AnimalCard from "../../components/cards/AnimalCard";
 import FilterColumn from "../../components/filter/FilterColumn";
 import AnimalCategoryCard from "../../components/cards/AnimalCategoryCard";

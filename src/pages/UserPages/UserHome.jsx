@@ -1,12 +1,11 @@
 import React from 'react'
 
-
-const Inicio = () => {
+const UserHome = () => {
   return (
     <div className="mt-[120px] lg:mt-[100px] flex flex-col gap-2">
-       Inicio
+        UserHome
     </div>
   )
 }
 
-export default Inicio
+export default UserHome
