@@ -10,9 +10,9 @@ import { useMediaQuery } from 'react-responsive';
 
 const Shelters = () => {
   const [shelters, setShelters] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [selectedProvince, setSelectedProvince] = useState("");
-  const [searchTerm, setSearchTerm] = useState(""); // Nuevo estado para el término de búsqueda
+  const [searchTerm, setSearchTerm] = useState(""); 
   const [provinces, setProvinces] = useState([]);
   const itemsPerPage = 6;
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
@@ -46,12 +46,22 @@ const Shelters = () => {
     return province ? province.name : "Provincia Desconocida";
   };
 
-  // Calcular los índices de inicio y fin para la página actual
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  let filteredShelters = shelters;
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleProvinceChange = (e) => {
+    setSelectedProvince(e.target.value);
+    setCurrentPage(0); // Reiniciar la página cuando se cambia la provincia seleccionada
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(0); // Reiniciar la página cuando se cambia el término de búsqueda
+  };
 
   // Aplicar filtro por provincia
+  let filteredShelters = shelters;
   if (selectedProvince !== "") {
     filteredShelters = shelters.filter(shelter => shelter.province_id.toString() === selectedProvince);
   }
@@ -63,22 +73,12 @@ const Shelters = () => {
     );
   }
 
+  // Calcular los índices de inicio y fin para la página actual
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // Obtener los refugios de la página actual
   const currentShelters = filteredShelters.slice(startIndex, endIndex);
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const handleProvinceChange = (e) => {
-    setSelectedProvince(e.target.value);
-    setCurrentPage(1); // Resetear la página cuando se cambia la provincia seleccionada
-  };
-
-  // Manejar el cambio en el término de búsqueda
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-    setCurrentPage(1); // Resetear la página cuando se cambia el término de búsqueda
-  };
 
   return (
     <div className="mt-[120px] lg:mt-[100px] flex flex-col gap-2">

@@ -1,11 +1,11 @@
 import React from 'react'
 
-const MyAnimals = () => {
+const AnimalsShelter = () => {
   return (
     <div className="mt-[120px] lg:mt-[100px] flex flex-col gap-2">
-        myAnimals
+    AnimalsShelter
     </div>
   )
 }
 
-export default MyAnimals
+export default AnimalsShelter
