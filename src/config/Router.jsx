@@ -13,7 +13,7 @@ import UserHome from "../pages/UserPages/UserHome";
 import NavbarUser from "../components/navbars/NavbarUser";
 
 const AdminRoute = ({ element }) => {
-    const rol = localStorage.getItem('role');
+    const role = localStorage.getItem('role');
     return role === 'Admin' ? element : <Navigate to="/login" />;
   };
   

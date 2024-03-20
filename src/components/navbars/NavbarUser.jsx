@@ -4,6 +4,7 @@ import LogoNav from '../../assets/images/Logo-Azul.svg';
 import { FiLogOut } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
+import UseApi from '../../services/UseApi';
 
 const NavbarUser = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +12,18 @@ const NavbarUser = () => {
     const toggleMenu = () => {
       setIsOpen(!isOpen);
     };
+
+    const handleLogout = async () => {
+      try {
+          await UseApi.logout(localStorage.getItem("token"));
+          localStorage.removeItem("token");
+          localStorage.removeItem("role");
+          window.location.href = "/login"; 
+      } catch (error) {
+          console.error("Error al cerrar sesión:", error);
+      }
+  };
+
   
     return (
       <>
@@ -28,7 +41,7 @@ const NavbarUser = () => {
             <div className="flex -1 md:order-2 space-x-3 md:space-x-3 rtl:space-x-reverse align-middle">
             <FaUserCircle className="text-primaryColor size-6" />
             <FaHeart className="text-secondaryColor size-6"/>
-            <FiLogOut className="text-primaryColor size-6" />
+            <FiLogOut className="text-primaryColor size-6" onClick={handleLogout} /> 
               <button
                 onClick={toggleMenu}
                 type="button"
