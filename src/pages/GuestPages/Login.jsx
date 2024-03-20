@@ -36,10 +36,10 @@ const Login = () => {
           navigate("/adopta");
           break;
         case "User":
-          navigate("/protectoras&refugios");
+          navigate("/UserHome");
           break;
         case "Shelter":
-          navigate("/sobreNosotros");
+          navigate("/shelter/misAnimales");
           break;
         default:
           console.log("Rol no reconocido");

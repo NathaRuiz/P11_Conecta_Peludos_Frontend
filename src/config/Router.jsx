@@ -13,6 +13,8 @@ import UserHome from "../pages/UserPages/UserHome";
 import NavbarUser from "../components/navbars/NavbarUser";
 import NavbarShelter from "../components/navbars/NavbarShelter";
 import AnimalsShelter from "../pages/ShelterPages/AnimalsShelter";
+import MyViewPage from "../pages/ShelterPages/MyViewPage";
+import ShelterAboutUs from "../pages/ShelterPages/ShelterAboutUs";
 
 
 const AdminRoute = ({ element }) => {
@@ -47,7 +49,9 @@ const Router = () => {
 
         {/* Rutas protegidas para Shelter*/}
         <Route path="/shelter/misAnimales" element={<ShelterRoute element={<><NavbarShelter/><AnimalsShelter/></>} />} />
-        
+        <Route path="/shelter/comoMeVen" element={<ShelterRoute element={<><NavbarShelter/><MyViewPage/></>} />} />
+        <Route path="/shelter/sobreNosotros" element={<ShelterRoute element={<><NavbarShelter/><ShelterAboutUs/></>} />} />
+
         {/* Rutas protegidas para User*/}
         <Route path="/UserHome" element={<UserRoute element={<><NavbarUser/><UserHome/></>} />} />
 
