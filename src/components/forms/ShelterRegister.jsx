@@ -148,6 +148,7 @@ const ShelterRegister = ({ onSubmit }) => {
             name="name"
             value={userData.name}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-4">
@@ -164,6 +165,7 @@ const ShelterRegister = ({ onSubmit }) => {
             name="email"
             value={userData.email}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-4">
@@ -180,6 +182,7 @@ const ShelterRegister = ({ onSubmit }) => {
             name="address"
             value={userData.address}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-4">
@@ -194,6 +197,7 @@ const ShelterRegister = ({ onSubmit }) => {
             name="province_id"
             value={selectedProvince}
             onChange={handleProvinceChange}
+            required
             className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
             <option disabled>Escoge una</option>
@@ -216,6 +220,7 @@ const ShelterRegister = ({ onSubmit }) => {
             name="type"
             value={userData.type}
             onChange={handleChange}
+            required
             className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
             <option value="">Selecciona el tipo</option>
@@ -237,6 +242,7 @@ const ShelterRegister = ({ onSubmit }) => {
             name="telephone"
             value={userData.telephone}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-4">
@@ -251,6 +257,7 @@ const ShelterRegister = ({ onSubmit }) => {
             name="description"
             value={userData.description}
             onChange={handleChange}
+            required
             className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           ></textarea>
         </div>
@@ -266,6 +273,7 @@ const ShelterRegister = ({ onSubmit }) => {
             name="image_url"
             type="file"
             onChange={handleImageChange}
+            required
             className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
@@ -283,6 +291,7 @@ const ShelterRegister = ({ onSubmit }) => {
             name="password"
             value={userData.password}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-4">
@@ -299,6 +308,7 @@ const ShelterRegister = ({ onSubmit }) => {
             name="password_confirmation"
             value={passwordConfirmation}
             onChange={handlePasswordConfirmationChange}
+            required
           />
         </div>
         <div className="md:col-span-2 flex justify-center">
