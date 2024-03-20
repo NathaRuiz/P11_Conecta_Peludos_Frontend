@@ -11,6 +11,8 @@ import Register from "../pages/GuestPages/Register";
 import Login from "../pages/GuestPages/Login";
 import UserHome from "../pages/UserPages/UserHome";
 import NavbarUser from "../components/navbars/NavbarUser";
+import NavbarShelter from "../components/navbars/NavbarShelter";
+import MyAnimals from "../pages/ShelterPages/MyAnimals";
 
 const AdminRoute = ({ element }) => {
     const role = localStorage.getItem('role');
@@ -41,7 +43,9 @@ const Router = () => {
         <Route path="/aprende" element={<><NavbarGuest/><Learn/></>}></Route> 
         <Route path="/animal/:id" element={<><NavbarGuest/><InfoAnimal/></>}></Route> 
         <Route path="/shelter/:id" element={<><NavbarGuest/><InfoShelter/></>}></Route> 
+
         {/* Rutas protegidas para Shelter*/}
+        <Route path="/shelter/misAnimales" element={<ShelterRoute element={<><NavbarShelter/><MyAnimals/></>} />} />
         
         {/* Rutas protegidas para User*/}
         <Route path="/UserHome" element={<UserRoute element={<><NavbarUser/><UserHome/></>} />} />

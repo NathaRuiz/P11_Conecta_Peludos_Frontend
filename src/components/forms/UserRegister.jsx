@@ -93,7 +93,7 @@ const UserRegister = ({ onSubmit }) => {
         </div>
       )}
 
-        <h2 className="text-2xl font-semibold mb-4">Regístrate</h2>
+        <h2 className="text-2xl font-semibold text-primaryColor text-center mb-4">Regístrate como Usuario</h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
