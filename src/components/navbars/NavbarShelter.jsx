@@ -35,7 +35,9 @@ const NavbarShelter = () => {
             />
           </Link>
           <div className="flex -1 md:order-2 space-x-3 md:space-x-3 rtl:space-x-reverse align-middle">
+          <Link to="/shelter/perfil">
           <FaUserCircle className="text-primaryColor size-6" />
+          </Link>
           <FiLogOut className="text-primaryColor size-6" onClick={handleLogout} />
             <button
               onClick={toggleMenu}

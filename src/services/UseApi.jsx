@@ -34,6 +34,23 @@ const UseApi = {
     }
   },
 
+  getUserData: async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('No hay token de acceso disponible');
+      }
+      const response = await axios.get(`${apiUrl}/user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 
   async getShelters() {
     try {
@@ -97,7 +114,7 @@ const UseApi = {
 
   async getShelterDataById(id) {
     try {
-      const response = await axios.get(`${apiUrl}/shelter/${id}/data`);
+      const response = await axios.get(`${apiUrl}/user`);
       return response.data;
     } catch (error) {
       console.error("Error al obtener al shelter por ID:", error);
