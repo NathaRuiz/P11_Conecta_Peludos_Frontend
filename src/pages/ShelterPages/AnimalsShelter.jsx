@@ -117,7 +117,7 @@ const AnimalsShelter = () => {
         Listado de mis Animales
       </h2>
       <div className="flex flex-wrap justify-between">
-        <div className="flex items-center w-[60%] gap-4 mb-4">
+        <div className="flex items-center w-[70%] gap-4 mb-4">
         <select
           value={selectedCategory}
           onChange={handleProvinceChange}
