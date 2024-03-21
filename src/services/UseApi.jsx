@@ -3,6 +3,8 @@ import axios from "axios";
 const apiUrl = "http://localhost:8000/api";
 
 const UseApi = {
+
+ /*------Consumo de rutas api para usuarios no registrados-----*/ 
   async login(credentials) {
     try {
       const response = await axios.post(`${apiUrl}/login`, credentials);
@@ -52,6 +54,9 @@ const UseApi = {
     }
   },
 
+
+   /*------Consumo de rutas api publicas------*/ 
+
   async getShelters() {
     try {
       const response = await axios.get(`${apiUrl}/shelters`);
@@ -92,7 +97,7 @@ const UseApi = {
     }
   },
 
-  async getAnimalById(id) {
+  async getAnimalById(id) { //show para ver cualquier animal con la info basica
     try {
       const response = await axios.get(`${apiUrl}/animal/${id}`);
       return response.data;
@@ -102,7 +107,7 @@ const UseApi = {
     }
   },
 
-  async getAnimalDataById(id) {
+  async getAnimalDataById(id) { //Show para ver cualquier animal con toda la info asociada(shelter y provincia)
     try {
       const response = await axios.get(`${apiUrl}/animal/${id}/data`);
       return response.data;
@@ -121,6 +126,9 @@ const UseApi = {
       return null;
     }
   },
+
+
+ /*------Consumo de rutas api para el Shelter-----*/ 
 
   async getShelterAnimals() {
     try {

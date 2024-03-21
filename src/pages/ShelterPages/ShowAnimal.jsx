@@ -14,7 +14,7 @@ const ShowAnimal = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const fetchedData = await UseApi.getAnimalDataById(id);
+        const fetchedData = await UseApi.getShelterAnimalById(id);
         setAnimalData(fetchedData);
       } catch (error) {
         console.error("Error al obtener información:", error);
@@ -23,24 +23,7 @@ const ShowAnimal = () => {
 
     fetchData();
   }, [id]);
-  // const [animals, setAnimals] = useState([]);
-
-  // useEffect(() => {
-  //     const fetchData = async () => {
-  //         try {
-  //             const fetchedAnimals = await UseApi.getShelterAnimals();
-  //             setAnimals(fetchedAnimals);
-
-  //           } catch (error) {
-  //             console.error("Error al obtener datos:", error);
-  //             setErrorMessage(
-  //               "Error al obtener datos. Por favor, inténtalo de nuevo más tarde."
-  //             );
-  //           }
-  //         };
-  //     fetchData();
-  //   }, []);
-
+  
   const deleteAnimal = async (id) => {
     // Mostrar alerta de confirmación
     const confirmDelete = window.confirm(
@@ -50,11 +33,6 @@ const ShowAnimal = () => {
     if (confirmDelete) {
       try {
         await UseApi.deleteAnimal(id);
-
-        // Actualizar la lista de productos después de la eliminación
-        // setAnimals((prevAnimals) =>
-        // prevAnimals.filter((animal) => animal.id !== id)
-        // );
 
         console.log(`Animal con ID ${id} eliminado con éxito`);
       } catch (error) {
