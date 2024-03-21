@@ -121,6 +121,76 @@ const UseApi = {
       return null;
     }
   },
+
+  async getShelterAnimals() {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${apiUrl}/shelter/animals`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async createAnimal(data) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(`${apiUrl}/animal/create`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getShelterAnimalById(id) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${apiUrl}/shelter/animal/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async updateAnimal(id, data) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.put(`${apiUrl}/animal/update/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async deleteAnimal(id) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.delete(`${apiUrl}/animal/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default UseApi;

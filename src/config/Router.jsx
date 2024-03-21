@@ -16,6 +16,9 @@ import AnimalsShelter from "../pages/ShelterPages/AnimalsShelter";
 import MyViewPage from "../pages/ShelterPages/MyViewPage";
 import ShelterAboutUs from "../pages/ShelterPages/ShelterAboutUs";
 import Profile from "../pages/ShelterPages/Profile";
+import EditAnimal from "../pages/ShelterPages/EditAnimal";
+import CreateAnimal from "../pages/ShelterPages/CreateAnimal";
+import ShowAnimal from "../pages/ShelterPages/ShowAnimal";
 
 
 const AdminRoute = ({ element }) => {
@@ -45,7 +48,7 @@ const Router = () => {
         <Route path="/adopta" element={<><NavbarGuest/><Adopta/></>}></Route> 
         <Route path="/sobreNosotros" element={<><NavbarGuest/><AboutUs/></>}></Route> 
         <Route path="/aprende" element={<><NavbarGuest/><Learn/></>}></Route> 
-        <Route path="/animal/:id" element={<><NavbarGuest/><InfoAnimal/></>}></Route> 
+        <Route path="/animal/:id" element={<><NavbarGuest/><InfoAnimal link={`/shelter/:id`}/></>}></Route> 
         <Route path="/shelter/:id" element={<><NavbarGuest/><InfoShelter/></>}></Route> 
 
         {/* Rutas protegidas para Shelter*/}
@@ -53,6 +56,9 @@ const Router = () => {
         <Route path="/shelter/comoMeVen" element={<ShelterRoute element={<><NavbarShelter/><MyViewPage/></>} />} />
         <Route path="/shelter/sobreNosotros" element={<ShelterRoute element={<><NavbarShelter/><ShelterAboutUs/></>} />} />
         <Route path="/shelter/perfil" element={<ShelterRoute element={<><NavbarShelter/><Profile/></>} />} />
+        <Route path="/shelter/editarAnimal/:id" element={<ShelterRoute element={<><NavbarShelter/><EditAnimal/></>} />} />
+        <Route path="/shelter/registrarAnimal" element={<ShelterRoute element={<><NavbarShelter/><CreateAnimal/></>} />} />
+        <Route path="/shelter/verAnimal/:id" element={<ShelterRoute element={<><NavbarShelter/><InfoAnimal link={`/shelter/perfil`}/><ShowAnimal/></>} />} />
 
         {/* Rutas protegidas para User*/}
         <Route path="/UserHome" element={<UserRoute element={<><NavbarUser/><UserHome/></>} />} />
