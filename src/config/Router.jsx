@@ -40,6 +40,7 @@ const Router = () => {
   return (
     <BrowserRouter>
     <Routes>
+      
         {/* Rutas publicas */}
         <Route path="/" element={<><NavbarGuest/> <Inicio/></>}></Route> 
         <Route path="/register" element={<><NavbarGuest/><Register/></>}></Route>
@@ -48,7 +49,7 @@ const Router = () => {
         <Route path="/adopta" element={<><NavbarGuest/><Adopta/></>}></Route> 
         <Route path="/sobreNosotros" element={<><NavbarGuest/><AboutUs/></>}></Route> 
         <Route path="/aprende" element={<><NavbarGuest/><Learn/></>}></Route> 
-        <Route path="/animal/:id" element={<><NavbarGuest/><InfoAnimal link={`/shelter/:id`}/></>}></Route> 
+        <Route path="/animal/:id" element={<><NavbarGuest/><InfoAnimal/></>}></Route> 
         <Route path="/shelter/:id" element={<><NavbarGuest/><InfoShelter/></>}></Route> 
 
         {/* Rutas protegidas para Shelter*/}
@@ -58,7 +59,7 @@ const Router = () => {
         <Route path="/shelter/perfil" element={<ShelterRoute element={<><NavbarShelter/><Profile/></>} />} />
         <Route path="/shelter/editarAnimal/:id" element={<ShelterRoute element={<><NavbarShelter/><EditAnimal/></>} />} />
         <Route path="/shelter/registrarAnimal" element={<ShelterRoute element={<><NavbarShelter/><CreateAnimal/></>} />} />
-        <Route path="/shelter/verAnimal/:id" element={<ShelterRoute element={<><NavbarShelter/><InfoAnimal link={`/shelter/perfil`}/><ShowAnimal/></>} />} />
+        <Route path="/shelter/verAnimal/:id" element={<ShelterRoute element={<><NavbarShelter/><ShowAnimal/></>} />} />
 
         {/* Rutas protegidas para User*/}
         <Route path="/UserHome" element={<UserRoute element={<><NavbarUser/><UserHome/></>} />} />

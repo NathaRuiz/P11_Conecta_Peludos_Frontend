@@ -40,12 +40,6 @@ const Shelters = () => {
     fetchProvinces();
   }, []);
 
-  // Obtener el nombre de la provincia para cada refugio
-  const getProvinceName = (provinceId) => {
-    const province = provinces.find((p) => p.id === provinceId);
-    return province ? province.name : "Provincia Desconocida";
-  };
-
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -109,7 +103,7 @@ const Shelters = () => {
           {currentShelters.map((shelter) => (
             <ShelterCard
               key={shelter.id}
-              shelter={{ ...shelter, province: getProvinceName(shelter.province_id) }}
+              shelter={shelter}
             />
           ))}
         </div>

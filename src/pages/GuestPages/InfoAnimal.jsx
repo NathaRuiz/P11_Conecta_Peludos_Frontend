@@ -41,7 +41,6 @@ const InfoAnimal = ({link}) => {
           <div className="flex flex-wrap gap-3 w-[91%] justify-around items-strech m-auto lg:gap-0">
             <AnimalSecondaryInfo animal={animalData.animal} />
             <ShelterAnimalCard
-              link={link}
               shelter={animalData.shelter}
               province={animalData.province}
             />

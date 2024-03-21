@@ -1,27 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import UseApi from "../../services/UseApi";
 import { IoLocationOutline } from "react-icons/io5";
 
 const ShelterCard = ({ shelter }) => {
-  const [province, setProvince] = useState(null);
   const backgroundColor = shelter.type === "Protectora" ? "bg-tertiaryColor" : "bg-quarteryColor";
-
-  useEffect(() => {
-    const fetchProvinces = async () => {
-      try {
-        const fetchedProvinces = await UseApi.getProvinces(); 
-        const shelterProvince = fetchedProvinces.find(
-          (province) => province.id === shelter.province_id
-        );
-        setProvince(shelterProvince);
-      } catch (error) {
-        console.error("Error al obtener las provincias:", error);
-      }
-    };
-
-    fetchProvinces();
-  }, [shelter.province_id]);
 
   return (
     <>
@@ -35,7 +17,7 @@ const ShelterCard = ({ shelter }) => {
             <div className="flex items-center">
               <IoLocationOutline className="text-secondaryLetterColor" />
               <p className="text-secondaryLetterColor lg:text-xs text-sm">
-                {province ? province.name : "Cargando..."}
+                {shelter.province_id.name}
               </p>
             </div>
             <div className="flex items-baseline gap-2">

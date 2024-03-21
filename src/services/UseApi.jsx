@@ -114,7 +114,7 @@ const UseApi = {
 
   async getShelterDataById(id) {
     try {
-      const response = await axios.get(`${apiUrl}/user`);
+      const response = await axios.get(`${apiUrl}/shelter/${id}/data`);
       return response.data;
     } catch (error) {
       console.error("Error al obtener al shelter por ID:", error);

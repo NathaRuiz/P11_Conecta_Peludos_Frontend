@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 
-const ShelterAnimalCard = ({ shelter, province,link }) => {
+const ShelterAnimalCard = ({ shelter, province}) => {
   const backgroundColor = shelter && shelter.type === "Protectora" ? "bg-tertiaryColor" : "bg-quarteryColor";
 
   return (
@@ -24,7 +24,7 @@ const ShelterAnimalCard = ({ shelter, province,link }) => {
                   {shelter.type}
                 </span>
               </div>
-              <Link to={link} className="rounded-full px-3 py-1 lg:text-xs text-sm font-semibold text-white bg-primaryColor cursor-pointer">
+              <Link to={`/shelter/${shelter.id}`} className="rounded-full px-3 py-1 lg:text-xs text-sm font-semibold text-white bg-primaryColor cursor-pointer">
                   Explora más
               </Link>
             </div>

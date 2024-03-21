@@ -6,6 +6,7 @@ import { FaTrashCan } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
 import { BiSolidShow } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { IoMdAddCircle } from "react-icons/io";
 
 const AnimalsShelter = () => {
   const itemsPerPage = 2;
@@ -115,7 +116,8 @@ const AnimalsShelter = () => {
       <h2 className="text-2xl text-primaryColor font-bold mb-4">
         Listado de mis Animales
       </h2>
-      <div className="flex flex-wrap items-center gap-4 mb-4">
+      <div className="flex flex-wrap justify-between">
+        <div className="flex items-center w-[60%] gap-4 mb-4">
         <select
           value={selectedCategory}
           onChange={handleProvinceChange}
@@ -129,6 +131,13 @@ const AnimalsShelter = () => {
           ))}
         </select>
         <Search onSearchChange={handleSearchChange} />
+        </div>
+        <Link
+          to={`/shelter/registrarAnimal`}
+          className="flex items-center gap-2 bg-quarteryColor text-primaryColor font-semibold py-2 px-4 rounded-xl text-center hover:bg-yellow-500 focus:outline-none focus:ring focus:border-yellow-600 self-end"
+        >
+          <IoMdAddCircle size={20}/>Registrar Animal
+        </Link>
       </div>
       <div className="overflow-x-auto shadow-sm rounded-xl">
         <table className="w-full text-sm text-left bg-white border">
