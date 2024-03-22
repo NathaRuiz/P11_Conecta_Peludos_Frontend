@@ -10,7 +10,7 @@ const AnimalSecondaryInfo = ({ animal }) => {
 
   return (
     <>
-      <div className="lg:w-3/4 flex flex-col gap-2 bg-white rounded-lg overflow-hidden shadow-md p-4">
+      <div className="flex flex-col justify-between gap-4 lg:w-3/4 w-[90%] bg-white rounded-lg overflow-hidden shadow-md p-4 mb-4">
         <h3 className="font-bold text-primaryColor text-md">Mis Historia</h3>
         <div className="text-primaryColor text-sm">{animal.my_story}</div>
         <h3 className="font-bold text-primaryColor text-md">¿Cómo soy?</h3>

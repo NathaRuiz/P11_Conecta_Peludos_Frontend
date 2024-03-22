@@ -67,7 +67,7 @@ const CreateAnimal = () => {
   };
 
   return (
-    <div className=" lg:mt-[100px] gap-1 mt-[120px] w-[90%] lg:w-[50%] mx-auto bg-white rounded-lg overflow-hidden shadow-lg p-6 mb-5">
+    <div className=" lg:mt-[100px] gap-1 mt-[120px] w-[90%] mx-auto bg-white rounded-lg overflow-hidden shadow-lg p-6 mb-5">
       {errorMessage && (
         <div className="text-red-700 bg-red-300 p-3 rounded">
           {errorMessage}
@@ -79,9 +79,8 @@ const CreateAnimal = () => {
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
       >
-        {" "}
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -103,6 +102,7 @@ const CreateAnimal = () => {
           <label  className="block text-gray-700 text-sm font-bold mb-2"  
             htmlFor="category_id">
             Categoria:
+            </label>
             <select
               name="category_id"
               value={formData.category_id}
@@ -118,7 +118,6 @@ const CreateAnimal = () => {
                 </option>
               ))}
             </select>
-          </label>
         </div>
         <div className="mb-4">
           <label
@@ -137,7 +136,6 @@ const CreateAnimal = () => {
             required
           />
         </div>
-        {/* Agrega el resto de los campos del formulario aquí */}
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -307,12 +305,14 @@ const CreateAnimal = () => {
             required
           />
         </div>
-        <button
-          type="submit"
-          className="text-white bg-gradient-to-r from-primaryColor to-secondaryColor hover:from-primaryColor-light hover:to-secondaryColor-light focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-        >
-          Crear Animal
-        </button>
+        <div className="col-span-full text-center mt-6">
+          <button
+            type="submit"
+            className="w-[50%] text-white bg-gradient-to-r from-primaryColor to-secondaryColor hover:from-primaryColor-light hover:to-secondaryColor-light focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          >
+            Registrar Animal
+          </button>
+        </div>
       </form>
     </div>
   );

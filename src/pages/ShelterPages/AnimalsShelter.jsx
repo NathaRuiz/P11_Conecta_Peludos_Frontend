@@ -74,7 +74,7 @@ const AnimalsShelter = () => {
   const currentAnimals = filteredAnimals.slice(startIndex, endIndex);
   const deleteAnimal = async (id) => {
     // Mostrar alerta de confirmación
-    const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar este producto?");
+    const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar este animal de tus registros?");
   
     if (confirmDelete) {
       try {
@@ -85,7 +85,7 @@ const AnimalsShelter = () => {
         setAnimals((prevAnimals) =>
         prevAnimals.filter((animal) => animal.id !== id)
         );
-  
+        
         console.log(`Animal con ID ${id} eliminado con éxito`);
       } catch (error) {
         console.error(`Error al eliminar el Animal con ID ${id}:`, error);
