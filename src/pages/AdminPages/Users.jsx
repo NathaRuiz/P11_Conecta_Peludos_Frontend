@@ -131,7 +131,9 @@ const Users = () => {
             <tr>
               <th className="px-4 py-2">Nombre</th>
               <th className="px-4 py-2">Email</th>
+              <th className="px-4 py-2">Dirección</th>
               <th className="px-4 py-2">Provincia</th>
+              <th className="px-4 py-2">Teléfono</th>
               <th className="px-4 py-2">Acciones</th>
             </tr>
           </thead>
@@ -143,9 +145,15 @@ const Users = () => {
                  {user.email}
                 </td>
                 <td className="px-4 py-2">
+                 {user.address}
+                </td>
+                <td className="px-4 py-2">
                   {provinces.find(
                     (province) => province.id === user.province_id.id
                   )?.name || "Desconocida"}
+                </td>
+                <td className="px-4 py-2">
+                 {user.telephone}
                 </td>
                 <td className="px-4 py-2 flex my-7">
                   <Link to={`/admin/edit/user/${user.id}`}>
@@ -160,12 +168,7 @@ const Users = () => {
                       className="hover:text-red-500 mx-1 text-secondaryLetterColor"
                     />
                   </button>
-                  <Link to={`/admin/user/${user.id}`}>
-                    <BiSolidShow
-                      size={24}
-                      className="hover:text-blue-500 mx-1 text-secondaryLetterColor"
-                    />
-                  </Link>
+                 
                 </td>
               </tr>
             ))}
