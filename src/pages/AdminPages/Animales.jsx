@@ -41,7 +41,7 @@ const Animales = () => {
     setCurrentPage(pageNumber);
   };
 
-  const handleProvinceChange = (e) => {
+  const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value); 
     setCurrentPage(0); 
   };
@@ -114,13 +114,13 @@ const Animales = () => {
   return (
     <div className="mt-[120px] lg:mt-[100px] w-[90%] m-auto flex flex-col gap-2">
       <h2 className="text-2xl text-primaryColor font-bold mb-4">
-        Listado de mis Animales
+        Listado de los Animales
       </h2>
       <div className="flex flex-wrap justify-between">
         <div className="flex items-center w-[70%] gap-4 mb-4">
         <select
           value={selectedCategory}
-          onChange={handleProvinceChange}
+          onChange={handleCategoryChange}
           className="p-2 border rounded bg-white"
         >
           <option value="">Todas las Categorías</option>
