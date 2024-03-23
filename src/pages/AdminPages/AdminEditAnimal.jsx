@@ -60,8 +60,7 @@ const AdminEditAnimal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Datos recibidos para la actualización:', formData);
-    
+     
     try {
       await UseApi.AdminUpdateAnimal(id, formData);
       navigate(`/animal/${id}`);
