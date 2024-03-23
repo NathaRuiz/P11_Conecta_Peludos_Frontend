@@ -49,12 +49,16 @@ const AnimalSecondaryInfo = ({ animal }) => {
     }
   };
 
+  const handleRegisterMessageClick = () => {
+    // Ocultar el mensaje de registro al hacer clic en él
+    setShowRegisterMessage(false);
+  };
 
   return (
     <>
       <div className="flex flex-col justify-between gap-4 lg:w-3/4 w-[90%] bg-white rounded-lg overflow-hidden shadow-md p-4 mb-4">
       {showRegisterMessage && (
-        <div className="absolute top-0 left-0 right-0 bg-red-500 text-white py-2 px-4 text-center">
+        <div className="absolute bottom-0 w-[80%] lg:w-[50%] bg-red-500 text-white py-2 px-4 text-center" onClick={handleRegisterMessageClick}>
           Por favor, regístrate como usuario para poder agregar a tus favoritos. ¡Es gratis y solo toma un minuto!
         </div>
       )}

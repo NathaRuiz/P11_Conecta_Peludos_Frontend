@@ -21,21 +21,22 @@ import ShowAnimal from "../pages/ShelterPages/ShowAnimal";
 import Favorites from "../pages/UserPages/Favorites";
 import UserProfile from "../pages/UserPages/UserProfile";
 import Contact from "../pages/UserPages/Contact";
+import AccessDenied from "../pages/AccessDenied";
 
 
 const AdminRoute = ({ element }) => {
     const role = localStorage.getItem('role');
-    return role === 'Admin' ? element : <Navigate to="/login" />;
+    return role === 'Admin' ? element : <Navigate to="/accesoDenegado" />;
   };
   
   const UserRoute = ({ element }) => {
     const role = localStorage.getItem('role');
-    return role === 'User' ? element : <Navigate to="/login" />;
+    return role === 'User' ? element : <Navigate to="/accesoDenegado" />;
   };
   
   const ShelterRoute = ({ element }) => {
     const role = localStorage.getItem('role');
-    return role === 'Shelter' ? element : <Navigate to="/login" />;
+    return role === 'Shelter' ? element : <Navigate to="/accesoDenegado" />;
   };
 
   
@@ -66,6 +67,7 @@ const AdminRoute = ({ element }) => {
         <Route path="/register" element={<><NavbarGuest/><Register/></>}></Route>
         <Route path="/login" element={<><NavbarGuest/><Login/></>}></Route>
 
+        <Route path="/accesoDenegado" element={<><NavBar/><AccessDenied/></>}></Route>
         <Route path="/adopta" element={<><NavBar/><Adopta/></>}></Route> 
         <Route path="/protectoras&refugios" element={<><NavBar/><Shelters/></>}></Route>
         <Route path="/sobreNosotros" element={<><NavBar/><AboutUs/></>}></Route> 
