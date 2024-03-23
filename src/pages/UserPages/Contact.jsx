@@ -76,13 +76,13 @@ const Contact = () => {
             </div>
           </div>
         </>
-      ) : (
-        <div className="text-green-600 font-semibold">
-          ¡Mensaje enviado correctamente a {animal && animal.shelter.name}!
-        </div>
-      )}
-    </div>
-  );
+      ) : messageSent ? ( 
+      <div className="text-green-600 font-semibold">
+        ¡Mensaje enviado correctamente a {animal && animal.shelter.name}!
+      </div>
+    ) : null} 
+  </div>
+);
 };
 
 export default Contact
