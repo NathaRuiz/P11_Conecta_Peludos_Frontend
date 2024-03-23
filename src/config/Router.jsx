@@ -100,6 +100,7 @@ const AdminRoute = ({ element }) => {
         <Route path="/admin/create/animal" element={<AdminRoute element={<><NavbarAdmin/><AdminCreateAnimal/></>} />} />
         <Route path="/admin/edit/animal/:id" element={<AdminRoute element={<><NavbarAdmin/><AdminEditAnimal/></>} />} />
         <Route path="/admin/usuarios" element={<AdminRoute element={<><NavbarAdmin/><Users/></>} />} />
+        <Route path="/admin/user/:id" element={<AdminRoute element={<><NavbarAdmin/><Users/></>} />} />
         <Route path="/admin/protectoras&refugios" element={<AdminRoute element={<><NavbarAdmin/><AdminShelters/></>} />} />
       
     </Routes>
