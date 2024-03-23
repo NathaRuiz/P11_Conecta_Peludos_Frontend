@@ -39,9 +39,13 @@ const NavbarUser = () => {
               />
             </Link>
             <div className="flex -1 md:order-2 space-x-3 md:space-x-3 rtl:space-x-reverse align-middle">
-            <FaUserCircle className="text-primaryColor size-6" />
-            <FaHeart className="text-secondaryColor size-6"/>
-            <FiLogOut className="text-primaryColor size-6" onClick={handleLogout} /> 
+              <Link to={`/user/perfil`}>
+            <FaUserCircle className="text-primaryColor size-6 cursor-pointer" />
+              </Link>
+              <Link to={`/user/favoritos`}>
+            <FaHeart className="text-secondaryColor size-6 cursor-pointer"/>
+              </Link>
+            <FiLogOut className="text-primaryColor size-6 cursor-pointer" onClick={handleLogout} /> 
               <button
                 onClick={toggleMenu}
                 type="button"
@@ -93,28 +97,28 @@ const NavbarUser = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/user/adopta" 
+                  <Link to="/adopta" 
                     className="block py-2 px-3 text-primaryColor rounded hover:bg-gray-100 "
                   >
                     Adopta
                   </Link>
                 </li>
                 <li>
-                  <Link to="/user/protectoras&refugios"
+                  <Link to="/protectoras&refugios"
                     className="block py-2 px-3 text-primaryColor rounded hover:bg-gray-100 "
                   >
                     Protectoras y Refugios
                   </Link>
                 </li>
                 <li>
-                  <Link to="/user/sobreNosotros"
+                  <Link to="/sobreNosotros"
                     className="block py-2 px-3 text-primaryColor rounded hover:bg-gray-100 "
                   >
                     Sobre Nosotros
                   </Link>
                 </li>
                 <li>
-                  <Link to="/user/aprende"
+                  <Link to="/aprende"
                     className="block py-2 px-3 text-primaryColor rounded hover:bg-gray-100 "
                   >
                     Aprende

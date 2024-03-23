@@ -26,14 +26,11 @@ const InfoShelter = () => {
         if (shelterData) {
           // Obtener todos los animales
           const allAnimals = await UseApi.getAnimals();
-          console.log("Todos los animales:", allAnimals);
-
+          
           // Filtrar los animales que pertenecen a este refugio
           const shelterAnimals = allAnimals.filter(
             (animal) => animal.user_id === shelterData.shelter.id
           );
-          console.log("Animales del refugio:", shelterAnimals);
-
           setAnimals(shelterAnimals);
         }
       } catch (error) {

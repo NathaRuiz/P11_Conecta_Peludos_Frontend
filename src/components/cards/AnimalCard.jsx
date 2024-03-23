@@ -8,6 +8,7 @@ import UseApi from "../../services/UseApi";
 const AnimalCard = ({ animal }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [shelterData, setShelterData] = useState(null);
+  const [showRegisterMessage, setShowRegisterMessage] = useState(false);
 
   useEffect(() => {
     const fetchShelterData = async () => {
@@ -20,11 +21,48 @@ const AnimalCard = ({ animal }) => {
     };
 
     fetchShelterData();
-  }, [animal.user_id]);
 
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+    const checkFavoriteStatus = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const userRole = localStorage.getItem("role");
+    
+        if (token && userRole === "User") {
+          const favorites = await UseApi.getFavorites();
+          setIsFavorite(favorites.some((favorite) => favorite.id === animal.id));
+        }
+      } catch (error) {
+        console.error("Error al verificar el estado de favorito:", error);
+      }
+    };
+
+    checkFavoriteStatus(); // Verificar el estado de favorito al montar el componente
+  }, [animal.id, animal.user_id]);
+
+  const toggleFavorite = async () => {
+    
+    try {
+      const token = localStorage.getItem('token');
+      const userRole = localStorage.getItem('role');
+      
+      if (!token || userRole !== 'User') {
+        setShowRegisterMessage(true);
+        return;
+      }
+
+      if (!isFavorite) {
+        await UseApi.addToFavorites(animal.id);
+      } else {
+        await UseApi.removeFromFavorites(animal.id);
+      }
+
+      setIsFavorite(!isFavorite);
+    } catch (error) {
+      console.error('Error al cambiar el estado de favorito:', error);
+     
+    }
   };
+
 
   const getStatusColor = () => {
     switch (animal.status) {
@@ -43,11 +81,20 @@ const AnimalCard = ({ animal }) => {
     }
   };
 
+  const handleRegisterMessageClick = () => {
+    // Ocultar el mensaje de registro al hacer clic en él
+    setShowRegisterMessage(false);
+  };
+
   return (
-    <Link
-      to={`/animal/${animal.id}`}
-      className="relative w-[70%] md:w-1/4 lg:w-1/5 bg-white rounded overflow-hidden shadow-xl cursor-pointer"
+    <div
+      className="relative w-[70%] md:w-1/4 lg:w-1/5 bg-white rounded overflow-hidden shadow-xl hover:shadow-gray-500"
     >
+      {showRegisterMessage && (
+        <div className="absolute top-5 left-0 right-0 bg-red-500 text-white py-2 px-4 text-center" onClick={handleRegisterMessageClick}>
+          Regístrate como usuario para poder agregar a tus favoritos. ¡Es gratis y solo toma un minuto!
+        </div>
+      )}
       <div
         className={`absolute top-0 right-0 ${getStatusColor()} font-bold px-2 py-1 rounded-bl`}
       >
@@ -55,9 +102,11 @@ const AnimalCard = ({ animal }) => {
       </div>
       <img className="w-full" src={animal.image_url} alt={animal.name} />
       <div className="px-3 py-4 ">
-        <div className="font-bold text-secondaryLetterColor lg:text-lg text-xl mb-2">
+        <Link to={`/animal/${animal.id}`} className="cursor-pointer">
+        <div className="font-bold text-secondaryLetterColor lg:text-lg text-xl mb-2  hover:text-primaryColor">
           {animal.name}
         </div>
+        </Link>
         <div className="flex justify-between flex-wrap">
           <div className="flex items-center">
             <IoLocationOutline className="text-secondaryLetterColor" />
@@ -75,7 +124,10 @@ const AnimalCard = ({ animal }) => {
               className="cursor-pointer text-gray-700 text-xl"
               role="img"
               aria-label="Favorite"
-              onClick={toggleFavorite}
+              onClick={(e) => {
+                e.stopPropagation(); // Detener la propagación del evento
+                toggleFavorite(); // Llamar a la función toggleFavorite
+              }}
             >
               {isFavorite ? (
                 <MdFavorite className="text-secondaryColor size-8 lg:size-6" /> // Corazón relleno
@@ -86,7 +138,7 @@ const AnimalCard = ({ animal }) => {
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

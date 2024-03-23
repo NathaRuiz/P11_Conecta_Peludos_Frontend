@@ -5,7 +5,7 @@ import AnimalPrimaryInfo from "../../components/cards/AnimalPrimaryInfo";
 import AnimalSecondaryInfo from "../../components/cards/AnimalSecondaryInfo";
 import ShelterAnimalCard from "../../components/cards/ShelterAnimalCard";
 
-const InfoAnimal = ({link}) => {
+const InfoAnimal = () => {
   const { id } = useParams();
   const [animalData, setAnimalData] = useState(null);
 

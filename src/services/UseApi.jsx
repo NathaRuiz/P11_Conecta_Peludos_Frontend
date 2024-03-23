@@ -199,6 +199,80 @@ const UseApi = {
       throw error;
     }
   },
+
+
+  /*------Consumo de rutas api para el User-----*/ 
+
+  async getFavorites() {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${apiUrl}/favorites`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async addToFavorites(id) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(`${apiUrl}/favorites/add/${id}`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async removeFromFavorites(id) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.delete(`${apiUrl}/favorites/remove/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async clearFavorites() {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.delete(`${apiUrl}/favorites/clear`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async sendMessageToShelter(id) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(`${apiUrl}/send-message/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  
 };
 
 export default UseApi;

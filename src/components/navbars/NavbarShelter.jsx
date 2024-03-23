@@ -36,9 +36,9 @@ const NavbarShelter = () => {
           </Link>
           <div className="flex -1 md:order-2 space-x-3 md:space-x-3 rtl:space-x-reverse align-middle">
           <Link to="/shelter/perfil">
-          <FaUserCircle className="text-primaryColor size-6" />
+          <FaUserCircle className="text-primaryColor size-6 cursor-pointer" />
           </Link>
-          <FiLogOut className="text-primaryColor size-6" onClick={handleLogout} />
+          <FiLogOut className="text-primaryColor size-6 cursor-pointer" onClick={handleLogout} />
             <button
               onClick={toggleMenu}
               type="button"
@@ -90,14 +90,7 @@ const NavbarShelter = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/shelter/comoMeVen"
-                  className="block py-2 px-3 text-primaryColor rounded hover:bg-gray-100 "
-                >
-                  ¿Cómo me ven?
-                </Link>
-              </li>
-              <li>
-                <Link to="/shelter/sobreNosotros"
+                <Link to="/sobreNosotros"
                   className="block py-2 px-3 text-primaryColor rounded hover:bg-gray-100 "
                 >
                   Sobre Nosotros

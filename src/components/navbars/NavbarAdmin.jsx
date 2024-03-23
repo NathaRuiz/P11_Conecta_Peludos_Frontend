@@ -35,8 +35,8 @@ const NavbarAdmin = () => {
             />
           </Link>
           <div className="flex -1 md:order-2 space-x-3 md:space-x-3 rtl:space-x-reverse align-middle">
-          <FaUserCircle className="text-primaryColor size-6" />
-          <FiLogOut className="text-primaryColor size-6" onClick={handleLogout} />
+          <FaUserCircle className="text-primaryColor size-6 cursor-pointer" />
+          <FiLogOut className="text-primaryColor size-6 cursor-pointer" onClick={handleLogout} />
             <button
               onClick={toggleMenu}
               type="button"
