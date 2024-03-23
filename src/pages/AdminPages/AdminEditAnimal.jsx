@@ -8,7 +8,7 @@ const AdminEditAnimal = () => {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-      user_id:"",
+      user_id: "",
       name: "",
       category_id: "",
       breed: "",
@@ -61,13 +61,9 @@ const AdminEditAnimal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Datos recibidos para la actualización:', formData);
-    const formDataToSend = new FormData();
-    for (const key in formData) {
-      formDataToSend.append(key, formData[key]);
-    }
-
+    
     try {
-      await UseApi.AdminUpdateAnimal(id, formDataToSend);
+      await UseApi.AdminUpdateAnimal(id, formData);
       navigate(`/animal/${id}`);
     } catch (error) {
       console.error("Error al actualizar animal:", error);
