@@ -272,7 +272,121 @@ const UseApi = {
       throw error;
     }
   },
-  
+
+
+  /*------Consumo de rutas api para el Admin-----*/ 
+  async createAnimal(data) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(`${apiUrl}/admin/animal/create`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async AdminUpdateAnimal(id, data) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.put(`${apiUrl}/admin/animal/update/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async AdminDeleteAnimal(id) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.delete(`${apiUrl}/admin/animal/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getUsers() {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${apiUrl}/admin/users`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getUserById(id) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${apiUrl}/admin/user/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async createUser(data) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(`${apiUrl}/admin/user/create`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async updateUser(id, data) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.put(`${apiUrl}/admin/user/update/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async deleteUser(id) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.delete(`${apiUrl}/admin/user/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
 };
 
 export default UseApi;

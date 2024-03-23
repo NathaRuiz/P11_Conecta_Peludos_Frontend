@@ -80,7 +80,7 @@ const NavbarAdmin = () => {
           >
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border bg-white md:space-x-4 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
               <li>
-                <Link to="/admin/aimales"
+                <Link to="/admin/animales"
                   className="block py-2 px-3 text-primaryColor rounded hover:bg-gray-100 "
                   aria-current="page"
                 >

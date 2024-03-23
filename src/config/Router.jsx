@@ -26,6 +26,8 @@ import NavbarAdmin from "../components/navbars/NavbarAdmin";
 import Animales from "../pages/AdminPages/Animales";
 import Users from "../pages/AdminPages/Users";
 import AdminShelters from "../pages/AdminPages/AdminShelters";
+import AdminCreateAnimal from "../pages/AdminPages/AdminCreateAnimal";
+import AdminEditAnimal from "../pages/AdminPages/AdminEditAnimal";
 
 
 const AdminRoute = ({ element }) => {
@@ -94,7 +96,9 @@ const AdminRoute = ({ element }) => {
         <Route path="/shelter/verAnimal/:id" element={<ShelterRoute element={<><NavbarShelter/><ShowAnimal/></>} />} />
 
         {/* Rutas protegidas para el Admin*/}
-        <Route path="/admin/aimales" element={<AdminRoute element={<><NavbarAdmin/><Animales/></>} />} />
+        <Route path="/admin/animales" element={<AdminRoute element={<><NavbarAdmin/><Animales/></>} />} />
+        <Route path="/admin/create/animal" element={<AdminRoute element={<><NavbarAdmin/><AdminCreateAnimal/></>} />} />
+        <Route path="/admin/edit/animal/:id" element={<AdminRoute element={<><NavbarAdmin/><AdminEditAnimal/></>} />} />
         <Route path="/admin/usuarios" element={<AdminRoute element={<><NavbarAdmin/><Users/></>} />} />
         <Route path="/admin/protectoras&refugios" element={<AdminRoute element={<><NavbarAdmin/><AdminShelters/></>} />} />
       

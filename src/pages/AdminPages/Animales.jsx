@@ -74,12 +74,12 @@ const Animales = () => {
   const currentAnimals = filteredAnimals.slice(startIndex, endIndex);
   const deleteAnimal = async (id) => {
     
-    const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar este animal de tus registros?");
+    const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar este animal de los registros?");
   
     if (confirmDelete) {
       try {
         
-        await UseApi.deleteAnimal(id);
+        await UseApi.AdminDeleteAnimal(id);
   
        
         setAnimals((prevAnimals) =>
@@ -133,7 +133,7 @@ const Animales = () => {
         <Search onSearchChange={handleSearchChange} />
         </div>
         <Link
-          to={`/shelter/registrarAnimal`}
+          to={`/admin/create/animal`}
           className="flex items-center gap-2 bg-quarteryColor text-primaryColor font-semibold py-2 px-4 rounded-xl text-center hover:bg-yellow-500 focus:outline-none focus:ring focus:border-yellow-600 self-end"
         >
           <IoMdAddCircle size={20}/>Registrar Animal
@@ -172,9 +172,9 @@ const Animales = () => {
                 <td className="px-4 py-2">{animal.gender}</td>
                 <td className="px-4 py-2"><span className={`px-1 py-1 text-primaryColor font-semibold rounded-lg ${getStatusColor(animal.status)}`}>{animal.status}</span></td>
                 <td className="px-4 py-2 flex my-7">
-                  <Link to={`/shelter/editarAnimal/${animal.id}`} ><FaEdit size={20} className="hover:text-yellow-500 text-secondaryLetterColor mx-1"/></Link>
+                  <Link to={`/admin/edit/animal/${animal.id}`} ><FaEdit size={20} className="hover:text-yellow-500 text-secondaryLetterColor mx-1"/></Link>
                   <button  onClick={() => deleteAnimal(animal.id)}><FaTrashCan size={20} className="hover:text-red-500 mx-1 text-secondaryLetterColor"/></button>
-                  <Link to={`/shelter/verAnimal/${animal.id}`}><BiSolidShow size={24} className="hover:text-blue-500 mx-1 text-secondaryLetterColor"/></Link>
+                  <Link to={`/animal/${animal.id}`}><BiSolidShow size={24} className="hover:text-blue-500 mx-1 text-secondaryLetterColor"/></Link>
                 </td>
               </tr>
             ))}

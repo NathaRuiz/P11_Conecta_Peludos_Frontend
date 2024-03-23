@@ -77,7 +77,7 @@ const AnimalSecondaryInfo = ({ animal }) => {
       <div className="flex flex-col justify-between gap-4 lg:w-3/4 w-[90%] bg-white rounded-lg overflow-hidden shadow-md p-4 mb-4">
       {showRegisterMessage && (
         <div className="absolute bottom-0 w-[80%] lg:w-[50%] bg-red-500 text-white py-2 px-4 text-center" onClick={handleRegisterMessageClick}>
-          Por favor, regístrate como usuario para poder agregar a tus favoritos. ¡Es gratis y solo toma un minuto!
+          Por favor, regístrate como usuario para poder acceder a estas funciones.¡Es gratis y solo toma un minuto!
         </div>
       )}
         <h3 className="font-bold text-primaryColor text-md">Mis Historia</h3>
