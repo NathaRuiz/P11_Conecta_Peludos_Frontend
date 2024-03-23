@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { Link } from "react-router-dom";
 import UseApi from "../../services/UseApi";
+import { useNavigate } from "react-router-dom";
 
 const AnimalSecondaryInfo = ({ animal }) => {
+  const navigate = useNavigate();
   const [isFavorite, setIsFavorite] = useState(false);
   const [showRegisterMessage, setShowRegisterMessage] = useState(false);
 
@@ -54,6 +56,22 @@ const AnimalSecondaryInfo = ({ animal }) => {
     setShowRegisterMessage(false);
   };
 
+  const handleEstoyInteresado = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const userRole = localStorage.getItem('role');
+      
+      if (!token || userRole !== 'User') {
+        setShowRegisterMessage(true);
+        return;
+      }
+      navigate(`/user/contacta/${animal.id}`);
+
+    } catch (error) {
+      console.error('Error al manejar la acción de "Estoy Interesado":', error);
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col justify-between gap-4 lg:w-3/4 w-[90%] bg-white rounded-lg overflow-hidden shadow-md p-4 mb-4">
@@ -81,11 +99,11 @@ const AnimalSecondaryInfo = ({ animal }) => {
               <MdFavoriteBorder className="size-8 lg:size-6" />
             )}
           </span>
-          <Link to={`/user/contacta/${animal.id}`}
+          <button onClick={handleEstoyInteresado}
             className="rounded-full px-3 py-1 lg:text-xs text-sm font-semibold text-white bg-primaryColor"
           >
             Estoy Interesado
-          </Link>
+          </button>
         </div>
       </div>
     </>

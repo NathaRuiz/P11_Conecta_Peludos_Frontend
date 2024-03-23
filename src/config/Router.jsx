@@ -80,7 +80,7 @@ const AdminRoute = ({ element }) => {
         <Route path="/UserHome" element={<UserRoute element={<><NavbarUser/><UserHome/></>} />} />
         <Route path="/user/favoritos" element={<UserRoute element={<><NavbarUser/><Favorites/></>} />} />
         <Route path="/user/perfil" element={<UserRoute element={<><NavbarUser/><UserProfile/></>} />} />
-        <Route path="/user/contacta" element={<UserRoute element={<><NavbarUser/><Contact/></>} />} />
+        <Route path="/user/contacta/:id" element={<UserRoute element={<><NavbarUser/><Contact/></>} />} />
 
         {/* Rutas protegidas para Shelter*/}
         <Route path="/shelter/misAnimales" element={<ShelterRoute element={<><NavbarShelter/><AnimalsShelter/></>} />} />

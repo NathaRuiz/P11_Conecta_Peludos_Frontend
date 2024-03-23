@@ -259,10 +259,10 @@ const UseApi = {
     }
   },
 
-  async sendMessageToShelter(id) {
+  async sendMessageToShelter(id, message) {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(`${apiUrl}/send-message/${id}`, {
+      const response = await axios.post(`${apiUrl}/send-message/${id}`, { message }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

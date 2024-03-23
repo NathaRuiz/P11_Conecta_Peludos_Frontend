@@ -7,6 +7,7 @@ import Search from "../../components/search/Search";
 import BannerUneteD from '../../assets/images/Banner-Unete-Desktop.svg'
 import BannerUneteM from '../../assets/images/Banner-Unete-Mobile.svg'
 import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from "react-router-dom";
 
 const Shelters = () => {
   const [shelters, setShelters] = useState([]);
@@ -15,6 +16,9 @@ const Shelters = () => {
   const [searchTerm, setSearchTerm] = useState(""); 
   const [provinces, setProvinces] = useState([]);
   const itemsPerPage = 6;
+  const navigate = useNavigate();
+  const isAuthenticated = !!localStorage.getItem("token") && localStorage.getItem("role") === "User";
+
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
   useEffect(() => {
@@ -116,13 +120,13 @@ const Shelters = () => {
       </div>
       <div className="cursor-pointer">
         {isMobile ? (
-          <Link to={`/sobreNosotros`}>
+           <div className="cursor-pointer" onClick={(e) => !isAuthenticated && navigate("/register")}>
             <img
               src={BannerUneteM}
               alt="Banner"
               className="w-full h-auto m-auto"
             />
-          </Link>
+          </div>
         ) : (
           <img
             src={BannerUneteD}
