@@ -22,6 +22,8 @@ import Favorites from "../pages/UserPages/Favorites";
 import UserProfile from "../pages/UserPages/UserProfile";
 import Contact from "../pages/UserPages/Contact";
 import AccessDenied from "../pages/AccessDenied";
+import NavbarAdmin from "../components/navbars/NavbarAdmin";
+import Animales from "../pages/AdminPages/Animales";
 
 
 const AdminRoute = ({ element }) => {
@@ -89,6 +91,8 @@ const AdminRoute = ({ element }) => {
         <Route path="/shelter/registrarAnimal" element={<ShelterRoute element={<><NavbarShelter/><CreateAnimal/></>} />} />
         <Route path="/shelter/verAnimal/:id" element={<ShelterRoute element={<><NavbarShelter/><ShowAnimal/></>} />} />
 
+        {/* Rutas protegidas para el Admin*/}
+        <Route path="/admin/aimales" element={<AdminRoute element={<><NavbarAdmin/><Animales/></>} />} />
       
     </Routes>
 </BrowserRouter>

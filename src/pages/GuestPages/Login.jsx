@@ -33,7 +33,7 @@ const Login = () => {
 
       switch (role) {
         case "Admin":
-          navigate("/adopta");
+          navigate("/admin/aimales");
           break;
         case "User":
           navigate("/UserHome");
