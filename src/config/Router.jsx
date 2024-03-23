@@ -24,6 +24,8 @@ import Contact from "../pages/UserPages/Contact";
 import AccessDenied from "../pages/AccessDenied";
 import NavbarAdmin from "../components/navbars/NavbarAdmin";
 import Animales from "../pages/AdminPages/Animales";
+import Users from "../pages/AdminPages/Users";
+import AdminShelters from "../pages/AdminPages/AdminShelters";
 
 
 const AdminRoute = ({ element }) => {
@@ -93,6 +95,8 @@ const AdminRoute = ({ element }) => {
 
         {/* Rutas protegidas para el Admin*/}
         <Route path="/admin/aimales" element={<AdminRoute element={<><NavbarAdmin/><Animales/></>} />} />
+        <Route path="/admin/usuarios" element={<AdminRoute element={<><NavbarAdmin/><Users/></>} />} />
+        <Route path="/admin/protectoras&refugios" element={<AdminRoute element={<><NavbarAdmin/><AdminShelters/></>} />} />
       
     </Routes>
 </BrowserRouter>
