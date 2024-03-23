@@ -117,7 +117,7 @@ const AdminShelters = () => {
           <Search onSearchChange={handleSearchChange} />
         </div>
         <Link
-          to={`/admin/create/user`}
+          to={`/admin/registrar/p&r`}
           className="flex items-center gap-2 bg-quarteryColor text-primaryColor font-semibold py-2 px-4 rounded-xl text-center hover:bg-yellow-500 focus:outline-none focus:ring focus:border-yellow-600 self-end"
         >
           <IoMdAddCircle size={20} />
