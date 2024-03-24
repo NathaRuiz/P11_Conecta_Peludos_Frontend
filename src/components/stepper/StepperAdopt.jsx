@@ -10,8 +10,8 @@ const StepperAdopt = () => {
             1
           </span>
           <span>
-            <h3 className="font-medium leading-tight mb-1">Busca</h3>
-            <p className="text-sm">
+            <h3 className="font-semibold leading-tight mb-1">Busca</h3>
+            <p className="text-md">
               Nuestra plataforma cuenta con una amplia variedad de animales.
               Utiliza nuestro filtro para personalizar tu búsqueda y encontrar
               el compañero perfecto que se adapte a tus necesidades
@@ -23,8 +23,8 @@ const StepperAdopt = () => {
             2
           </span>
           <span>
-            <h3 className="font-medium leading-tight mb-1">Contacta</h3>
-            <p className="text-sm">
+            <h3 className="font-semibold leading-tight mb-1">Contacta</h3>
+            <p className="text-md">
               ¿Ya has encontrado el animal que te enamora? Clica en “Me
               Interesa” y contactarás directamente con la protectora (debes
               estar registrado para enviar mensajes).
@@ -36,8 +36,8 @@ const StepperAdopt = () => {
             3
           </span>
           <span>
-            <h3 className="font-medium leading-tight mb-1">Adopta</h3>
-            <p className="text-sm">
+            <h3 className="font-semibold leading-tight mb-1">Adopta</h3>
+            <p className="text-md">
               Una vez enviado el mensaje, la protectora contactará contigo para
               indicarte como adoptar o cualquier otro proceso en el que estes
               interesado.
