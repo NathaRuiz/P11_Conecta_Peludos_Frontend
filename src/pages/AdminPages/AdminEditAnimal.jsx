@@ -329,7 +329,7 @@ const AdminEditAnimal = () => {
             accept="image/*"
             name="image_url"
             onChange={handleImageChange}
-            required
+            
           />
         </div>
         <div className="col-span-full text-center mt-6">

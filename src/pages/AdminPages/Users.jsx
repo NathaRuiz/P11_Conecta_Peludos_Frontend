@@ -75,7 +75,7 @@ const Users = () => {
   const currentUsers = filteredUsers.slice(startIndex, endIndex);
   const deleteUser = async (id) => {
     const confirmDelete = window.confirm(
-      "¿Estás seguro de que quieres eliminar esta Protectora/Refugio?"
+      "¿Estás seguro de que quieres eliminar este Usuario?"
     );
 
     if (confirmDelete) {

@@ -78,7 +78,7 @@ const UserRegister = ({ onSubmit }) => {
           localStorage.setItem("token", token);
           localStorage.setItem("role", role);
           
-          navigate('/UserHome');
+          navigate('/');
         } catch (error) {
           console.error('Error al registrar usuario o iniciar sesión automáticamente:', error);
           // Manejar el error
