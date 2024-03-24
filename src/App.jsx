@@ -1,11 +1,17 @@
 import "./App.css";
+import Router from "./config/Router";
+import Footer from "./components/footer/Footer";
+
 
 function App() {
  
   return (
-    <>
-      <h1 className="text-3xl text-center font-bold underline">Hello world!</h1>
-    </>
+    <div className="flex flex-col min-h-screen">
+      <div className="flex-grow">
+        <Router/>
+      </div>
+      <Footer/>
+    </div>
   );
 }
 
