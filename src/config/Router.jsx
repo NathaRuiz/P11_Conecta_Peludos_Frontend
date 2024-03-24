@@ -10,7 +10,6 @@ import AboutUs from "../pages/GuestPages/AboutUs";
 import Learn from "../pages/GuestPages/Learn";
 import Register from "../pages/GuestPages/Register";
 import Login from "../pages/GuestPages/Login";
-import UserHome from "../pages/UserPages/UserHome";
 import NavbarUser from "../components/navbars/NavbarUser";
 import NavbarShelter from "../components/navbars/NavbarShelter";
 import AnimalsShelter from "../pages/ShelterPages/AnimalsShelter";
@@ -88,7 +87,6 @@ const AdminRoute = ({ element }) => {
 
           
         {/* Rutas protegidas para User*/}
-        <Route path="/UserHome" element={<UserRoute element={<><NavbarUser/><UserHome/></>} />} />
         <Route path="/user/favoritos" element={<UserRoute element={<><NavbarUser/><Favorites/></>} />} />
         <Route path="/user/perfil" element={<UserRoute element={<><NavbarUser/><UserProfile/></>} />} />
         <Route path="/user/contacta/:id" element={<UserRoute element={<><NavbarUser/><Contact/></>} />} />

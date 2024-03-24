@@ -88,7 +88,7 @@ const AnimalCard = ({ animal }) => {
 
   return (
     <div
-      className="relative w-[70%] md:w-1/4 lg:w-1/5 bg-white rounded overflow-hidden shadow-xl hover:shadow-gray-500"
+      className="relative w-[70%] md:w-1/4 lg:w-1/5 bg-white rounded-xl overflow-hidden shadow-xl hover:shadow-gray-500"
     >
       {showRegisterMessage && (
         <div className="absolute top-5 left-0 right-0 bg-red-500 text-white py-2 px-4 text-center" onClick={handleRegisterMessageClick}>

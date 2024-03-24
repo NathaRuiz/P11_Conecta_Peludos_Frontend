@@ -36,7 +36,7 @@ const Login = () => {
           navigate("/admin/animales");
           break;
         case "User":
-          navigate("/UserHome");
+          navigate("/");
           break;
         case "Shelter":
           navigate("/shelter/misAnimales");

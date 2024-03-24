@@ -7,7 +7,7 @@ const ShelterCard = ({ shelter }) => {
 
   return (
     <>
-      <Link to={`/shelter/${shelter.id}`}  className="w-[70%] md:w-1/4 lg:w-1/5 bg-white rounded-xl overflow-hidden shadow-xl">
+      <Link to={`/shelter/${shelter.id}`}  className="w-[70%] md:w-1/4 lg:w-1/5 bg-white rounded-xl overflow-hidden shadow-xl  hover:shadow-gray-500">
         <img className="w-full" src={shelter.image_url} alt={shelter.name} />
         <div className="px-3 py-5">
         <div className="font-bold text-secondaryLetterColor lg:text-[15px] text-xl mb-2">
