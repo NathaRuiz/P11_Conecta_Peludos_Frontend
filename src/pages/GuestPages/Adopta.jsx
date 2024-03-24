@@ -104,7 +104,7 @@ const Adopta = () => {
             <img
               src={BannerAmigoMasD}
               alt="Banner"
-              className="w-[90%] h-auto m-auto"
+              className="w-[80%] h-auto m-auto"
             />
           )}
         </div>

@@ -29,7 +29,7 @@ const NavbarUser = () => {
       <>
         <nav className="bg-white fixed w-full z-20 top-0 start-0">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <Link to="/UserHome" 
+          <Link to="/" 
               className="flex items-center space-x-3 rtl:space-x-reverse"
             >
               <img
@@ -89,7 +89,7 @@ const NavbarUser = () => {
             >
               <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border bg-white md:space-x-4 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
                 <li>
-                  <Link to="/UserHome"
+                  <Link to="/"
                     className="block py-2 px-3 text-primaryColor rounded hover:bg-gray-100 "
                     aria-current="page"
                   >

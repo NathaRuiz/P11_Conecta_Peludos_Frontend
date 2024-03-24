@@ -74,10 +74,10 @@ const AdminRoute = ({ element }) => {
     <Routes>
 
         {/* Rutas publicas */}
-        <Route path="/" element={<><NavbarGuest/> <Inicio/></>}></Route> 
         <Route path="/register" element={<><NavbarGuest/><Register/></>}></Route>
         <Route path="/login" element={<><NavbarGuest/><Login/></>}></Route>
 
+        <Route path="/" element={<><NavBar/> <Inicio/></>}></Route> 
         <Route path="/accesoDenegado" element={<><NavBar/><AccessDenied/></>}></Route>
         <Route path="/adopta" element={<><NavBar/><Adopta/></>}></Route> 
         <Route path="/protectoras&refugios" element={<><NavBar/><Shelters/></>}></Route>
