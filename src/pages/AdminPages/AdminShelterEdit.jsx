@@ -10,7 +10,6 @@ const AdminShelterEdit = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [userData, setUserData] = useState({
-    role_id: "",
     name: "",
     type: "",
     email: "",

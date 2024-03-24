@@ -31,6 +31,7 @@ import AdminEditAnimal from "../pages/AdminPages/AdminEditAnimal";
 import AdminUserRegister from "../pages/AdminPages/AdminUserRegister";
 import AdminShelterRegister from "../pages/AdminPages/AdminShelterRegister";
 import AdminShelterEdit from "../pages/AdminPages/AdminShelterEdit";
+import AdminEditUser from "../pages/AdminPages/AdminEditUser";
 
 
 const AdminRoute = ({ element }) => {
@@ -103,7 +104,8 @@ const AdminRoute = ({ element }) => {
         <Route path="/admin/create/animal" element={<AdminRoute element={<><NavbarAdmin/><AdminCreateAnimal/></>} />} />
         <Route path="/admin/edit/animal/:id" element={<AdminRoute element={<><NavbarAdmin/><AdminEditAnimal/></>} />} />
         <Route path="/admin/usuarios" element={<AdminRoute element={<><NavbarAdmin/><Users/></>} />} />
-        <Route path="/admin/editar/usuario/:id" element={<AdminRoute element={<><NavbarAdmin/><AdminShelterEdit/></>} />} />
+        <Route path="/admin/editar/p&r/:id" element={<AdminRoute element={<><NavbarAdmin/><AdminShelterEdit/></>} />} />
+        <Route path="/admin/editar/user/:id" element={<AdminRoute element={<><NavbarAdmin/><AdminEditUser/></>} />} />
         <Route path="/admin/registrarUsuario" element={<AdminRoute element={<><NavbarAdmin/><AdminUserRegister/></>} />} />
         <Route path="/admin/registrar/p&r" element={<AdminRoute element={<><NavbarAdmin/><AdminShelterRegister/></>} />} />
         <Route path="/admin/protectoras&refugios" element={<AdminRoute element={<><NavbarAdmin/><AdminShelters/></>} />} />

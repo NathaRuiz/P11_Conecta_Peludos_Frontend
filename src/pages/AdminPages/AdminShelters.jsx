@@ -163,7 +163,7 @@ const AdminShelters = () => {
                   )?.name || "Desconocida"}
                 </td>
                 <td className="px-4 py-2 flex my-7">
-                  <Link to={`/admin/editar/usuario/${shelter.id}`}>
+                  <Link to={`/admin/editar/p&r/${shelter.id}`}>
                     <FaEdit
                       size={20}
                       className="hover:text-yellow-500 text-secondaryLetterColor mx-1"
