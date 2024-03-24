@@ -80,7 +80,7 @@ const AnimalSecondaryInfo = ({ animal }) => {
           Por favor, regístrate como usuario para poder acceder a estas funciones.¡Es gratis y solo toma un minuto!
         </div>
       )}
-        <h3 className="font-bold text-primaryColor text-md">Mis Historia</h3>
+        <h3 className="font-bold text-primaryColor text-md">Mi Historia</h3>
         <div className="text-primaryColor text-sm">{animal.my_story}</div>
         <h3 className="font-bold text-primaryColor text-md">¿Cómo soy?</h3>
         <div className="text-primaryColor text-sm">{animal.description}</div>
