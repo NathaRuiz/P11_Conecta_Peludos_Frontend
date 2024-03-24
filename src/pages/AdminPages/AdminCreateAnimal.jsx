@@ -61,7 +61,7 @@ const AdminCreateAnimal = () => { const navigate = useNavigate();
       }
   
       try {
-        await UseApi.createAnimal(formDataToSend);
+        await UseApi.AdminCreateAnimal(formDataToSend);
         navigate("/admin/animales");
       } catch (error) {
         console.error("Error al crear animal:", error);

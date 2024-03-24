@@ -275,7 +275,7 @@ const UseApi = {
 
 
   /*------Consumo de rutas api para el Admin-----*/ 
-  async createAnimal(data) {
+  async AdminCreateAnimal(data) {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(`${apiUrl}/admin/animal/create`, data, {
