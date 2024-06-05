@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UseApi from "../../services/UseApi";
+import { FaRegCheckCircle } from "react-icons/fa";
 
 const CreateAnimal = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const CreateAnimal = () => {
 
   const [categories, setCategories] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
-
+  const [successMessage, setSuccessMessage] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -57,11 +58,14 @@ const CreateAnimal = () => {
 
     try {
       await UseApi.createAnimal(formDataToSend);
-      navigate("/shelter/misAnimales");
+      setSuccessMessage("Animal creado correctamente.");
+      setTimeout(() => {
+        navigate("/shelter/misAnimales");
+      }, 5000);
     } catch (error) {
       console.error("Error al crear animal:", error);
       setErrorMessage(
-        "Error al crear animal. Por favor, inténtalo de nuevo más tarde."
+        "Error al crear animal, por favor verifique el formato de imagen o inténtalo de nuevo más tarde."
       );
     }
   };
@@ -69,11 +73,24 @@ const CreateAnimal = () => {
   return (
     <div className=" lg:mt-[100px] gap-1 mt-[120px] w-[90%] mx-auto bg-white rounded-lg overflow-hidden shadow-lg p-6 mb-5">
       {errorMessage && (
-        <div className="text-red-700 bg-red-300 p-3 rounded">
+        <div className="text-red-700 bg-red-300 p-3 mb-3 rounded">
           {errorMessage}
         </div>
       )}
+      {successMessage && (
+        <div className="fixed inset-0 z-10 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none">
+          <div className="fixed inset-0 bg-gray-300 bg-opacity-75 transition-opacity"></div>
+          <div className="relative mx-auto max-w-sm p-6 bg-white rounded-lg shadow-xl">
+            <div className="flex flex-col items-center">
+              <FaRegCheckCircle size={32} color="green" />
 
+              <h3 className="text-lg font-semibold text-green-700">
+                {successMessage}
+              </h3>
+            </div>
+          </div>
+        </div>
+      )}
       <h2 className="text-2xl font-semibold text-primaryColor mb-6">
         Crear Nuevo Animal
       </h2>
@@ -99,25 +116,26 @@ const CreateAnimal = () => {
           />
         </div>
         <div className="mb-4">
-          <label  className="block text-gray-700 text-sm font-bold mb-2"  
-            htmlFor="category_id">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="category_id"
+          >
             Categoria:
-            </label>
-            <select
-              name="category_id"
-              value={formData.category_id}
-              onChange={handleChange}
-              required
-              className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-
-            >
-              <option value="">seleccione una</option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
+          </label>
+          <select
+            name="category_id"
+            value={formData.category_id}
+            onChange={handleChange}
+            required
+            className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          >
+            <option value="">seleccione una</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="mb-4">
           <label
