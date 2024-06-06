@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UseApi from "../../services/UseApi";
+import Message from "../../components/msg/Message";
 
 const EditAnimal = () => {
   const { id } = useParams();
@@ -23,16 +24,15 @@ const EditAnimal = () => {
 
   const [categories, setCategories] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   useEffect(() => {
     const fetchAnimalData = async () => {
       try {
         // Obtener los datos del animal a modificar
         const animalData = await UseApi.getShelterAnimalById(id);
-        setFormData(animalData.animal); 
-        console.log(formData);
+        setFormData(animalData.animal);
       } catch (error) {
-        console.error("Error al obtener los datos del animal:", error);
         setErrorMessage(
           "Error al obtener los datos del animal. Por favor, inténtalo de nuevo más tarde."
         );
@@ -44,7 +44,6 @@ const EditAnimal = () => {
         const fetchedCategories = await UseApi.getCategories();
         setCategories(fetchedCategories);
       } catch (error) {
-        console.error("Error al obtener categorías:", error);
         setErrorMessage(
           "Error al obtener categorías. Por favor, inténtalo de nuevo más tarde."
         );
@@ -54,7 +53,6 @@ const EditAnimal = () => {
     fetchAnimalData();
     fetchCategories();
   }, [id]);
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,9 +66,21 @@ const EditAnimal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const data = new FormData();
+
+    for (const key in formData) {
+      data.append(key, formData[key]);
+    }
+
+    if (formData.image_url instanceof File) {
+      data.append("image_url", formData.image_url);
+    }
     try {
-      await UseApi.updateAnimal(id, formData);
-      navigate(`/shelter/verAnimal/${id}`);
+      await UseApi.updateAnimal(id, data);
+      setSuccessMessage("Animal actualizado correctamente.");
+      setTimeout(() => {
+        navigate(`/shelter/verAnimal/${id}`);
+      }, 3000);
     } catch (error) {
       console.error("Error al actualizar el animal:", error);
       setErrorMessage(
@@ -78,8 +88,7 @@ const EditAnimal = () => {
       );
     }
   };
-    
-    
+
   return (
     <div className=" lg:mt-[100px] gap-1 mt-[120px] w-[90%]  mx-auto bg-white rounded-lg overflow-hidden shadow-lg p-6 mb-5">
       {errorMessage && (
@@ -87,6 +96,7 @@ const EditAnimal = () => {
           {errorMessage}
         </div>
       )}
+      {successMessage && <Message message={successMessage} />}
 
       <h2 className="text-2xl font-semibold text-primaryColor mb-6">
         Editar Animal
@@ -113,25 +123,26 @@ const EditAnimal = () => {
           />
         </div>
         <div className="mb-4">
-          <label  className="block text-gray-700 text-sm font-bold mb-2"  
-            htmlFor="category_id">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="category_id"
+          >
             Categoria:
-            </label>
-            <select
-              name="category_id"
-              value={formData.category_id}
-              onChange={handleChange}
-              required
-              className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-
-            >
-              <option value="">seleccione una</option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
+          </label>
+          <select
+            name="category_id"
+            value={formData.category_id}
+            onChange={handleChange}
+            required
+            className="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          >
+            <option value="">seleccione una</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="mb-4">
           <label
@@ -316,7 +327,6 @@ const EditAnimal = () => {
             accept="image/*"
             name="image_url"
             onChange={handleImageChange}
-            
           />
         </div>
         <div className="col-span-full text-center mt-6">
@@ -330,5 +340,5 @@ const EditAnimal = () => {
       </form>
     </div>
   );
-}
-export default EditAnimal
+};
+export default EditAnimal;

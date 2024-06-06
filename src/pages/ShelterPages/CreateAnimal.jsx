@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UseApi from "../../services/UseApi";
 import { FaRegCheckCircle } from "react-icons/fa";
+import Message from "../../components/msg/Message";
 
 const CreateAnimal = () => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const CreateAnimal = () => {
       setSuccessMessage("Animal creado correctamente.");
       setTimeout(() => {
         navigate("/shelter/misAnimales");
-      }, 5000);
+      }, 3000);
     } catch (error) {
       console.error("Error al crear animal:", error);
       setErrorMessage(
@@ -77,20 +78,8 @@ const CreateAnimal = () => {
           {errorMessage}
         </div>
       )}
-      {successMessage && (
-        <div className="fixed inset-0 z-10 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none">
-          <div className="fixed inset-0 bg-gray-300 bg-opacity-75 transition-opacity"></div>
-          <div className="relative mx-auto max-w-sm p-6 bg-white rounded-lg shadow-xl">
-            <div className="flex flex-col items-center">
-              <FaRegCheckCircle size={32} color="green" />
-
-              <h3 className="text-lg font-semibold text-green-700">
-                {successMessage}
-              </h3>
-            </div>
-          </div>
-        </div>
-      )}
+      {successMessage && <Message message={successMessage} />}
+      
       <h2 className="text-2xl font-semibold text-primaryColor mb-6">
         Crear Nuevo Animal
       </h2>

@@ -175,7 +175,7 @@ const UseApi = {
   async updateAnimal(id, data) {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put(`${apiUrl}/animal/update/${id}`, data, {
+      const response = await axios.post(`${apiUrl}/animal/update/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
