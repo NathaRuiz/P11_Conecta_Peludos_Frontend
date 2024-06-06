@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UseApi from "../../services/UseApi";
-import { FaRegCheckCircle } from "react-icons/fa";
 import Message from "../../components/msg/Message";
 
 const CreateAnimal = () => {
@@ -24,6 +23,8 @@ const CreateAnimal = () => {
   const [categories, setCategories] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const [loading, setLoading] = useState(false); // Estado de carga
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -51,6 +52,9 @@ const CreateAnimal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return; // Evitar múltiples envíos si ya se está cargando
+
+    setLoading(true); // Establecer el estado de carga a true al enviar la solicitud
 
     const formDataToSend = new FormData();
     for (const key in formData) {
@@ -68,6 +72,8 @@ const CreateAnimal = () => {
       setErrorMessage(
         "Error al crear animal, por favor verifique el formato de imagen o inténtalo de nuevo más tarde."
       );
+    }finally {
+      setLoading(false); // Restaurar el estado de carga a false después de completar la solicitud
     }
   };
 
@@ -79,7 +85,7 @@ const CreateAnimal = () => {
         </div>
       )}
       {successMessage && <Message message={successMessage} />}
-      
+
       <h2 className="text-2xl font-semibold text-primaryColor mb-6">
         Crear Nuevo Animal
       </h2>
