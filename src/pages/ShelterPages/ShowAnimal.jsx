@@ -7,11 +7,15 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import AnimalPrimaryInfo from "../../components/cards/AnimalPrimaryInfo";
 import AnimalSecondaryInfo from "../../components/cards/AnimalSecondaryInfo";
+import ConfirmDeleteModal from "../../components/msg/ConfirmDeleteModal";
 
 const ShowAnimal = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [animalData, setAnimalData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [animalToDelete, setAnimalToDelete] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,25 +30,36 @@ const ShowAnimal = () => {
     fetchData();
   }, [id]);
   
-  const deleteAnimal = async (id) => {
-    // Mostrar alerta de confirmación
-    const confirmDelete = window.confirm(
-      "¿Estás seguro de que quieres eliminar este animal de tus registros?"
-    );
-
-    if (confirmDelete) {
-      try {
-        await UseApi.deleteAnimal(id);
-        navigate(`/shelter/misAnimales`);
-        console.log(`Animal con ID ${id} eliminado con éxito`);
-      } catch (error) {
-        console.error(`Error al eliminar el Animal con ID ${id}:`, error);
-      }
-    }
+  const handleDeleteConfirmation = (animalId) => {
+    setAnimalToDelete(animalId);
+    setShowConfirmDelete(true);
   };
+
+  const deleteAnimal = async () => {
+   
+      try {
+        await UseApi.deleteAnimal(animalToDelete);
+        navigate(`/shelter/misAnimales`);
+        
+      } catch (error) {
+        setErrorMessage(
+          `Error al eliminar el Animal con ID ${animalToDelete}:`,
+          error
+        );
+      }
+    
+  };
+
   return (
     <div className="lg:mt-[100px] gap-1 mt-[120px] mb-8">
       <div className="">
+      {showConfirmDelete && (
+        <ConfirmDeleteModal
+          message="¿Estás seguro de que quieres eliminar este animal de tus registros?"
+          onConfirm={deleteAnimal}
+          onCancel={() => setShowConfirmDelete(false)}
+        />
+      )}
         {animalData ? (
           <div>
             <div className="flex flex-wrap  w-[90%] justify-around items-start m-auto">
@@ -69,7 +84,7 @@ const ShowAnimal = () => {
                     className="hover:text-yellow-500 text-secondaryLetterColor mx-1"
                   />
                 </Link>
-                <button onClick={() => deleteAnimal(id)}>
+                <button onClick={() => handleDeleteConfirmation(id)}>
                   <FaTrashCan
                     size={40}
                     className="hover:text-red-500 mx-1 text-secondaryLetterColor"

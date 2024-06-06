@@ -7,6 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import { BiSolidShow } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
+import ConfirmDeleteModal from "../../components/msg/ConfirmDeleteModal";
 
 const AnimalsShelter = () => {
   const itemsPerPage = 2;
@@ -17,6 +18,8 @@ const AnimalsShelter = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [animalToDelete, setAnimalToDelete] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +30,6 @@ const AnimalsShelter = () => {
         const fetchedCategories = await UseApi.getCategories();
         setCategories(fetchedCategories);
       } catch (error) {
-        console.error("Error al obtener datos:", error);
         setErrorMessage(
           "Error al obtener datos. Por favor, inténtalo de nuevo más tarde."
         );
@@ -42,16 +44,16 @@ const AnimalsShelter = () => {
   };
 
   const handleProvinceChange = (e) => {
-    setSelectedCategory(e.target.value); // Aquí se establece el ID de la categoría
-    setCurrentPage(0); // Reiniciar la página cuando se cambia la categoría seleccionada
+    setSelectedCategory(e.target.value);
+    setCurrentPage(0);
   };
 
   const handleSearchChange = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
-    setCurrentPage(0); // Reiniciar la página cuando se cambia el término de búsqueda
+    setCurrentPage(0);
   };
-  
+
   let filteredAnimals = animals;
   if (selectedCategory !== "") {
     filteredAnimals = filteredAnimals.filter(
@@ -67,29 +69,32 @@ const AnimalsShelter = () => {
       )
     );
   }
-  
+
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
   const currentAnimals = filteredAnimals.slice(startIndex, endIndex);
-  const deleteAnimal = async (id) => {
-    // Mostrar alerta de confirmación
-    const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar este animal de tus registros?");
-  
-    if (confirmDelete) {
-      try {
-        
-        await UseApi.deleteAnimal(id);
-  
-        // Actualizar la lista de productos después de la eliminación
-        setAnimals((prevAnimals) =>
-        prevAnimals.filter((animal) => animal.id !== id)
-        );
-        
-        console.log(`Animal con ID ${id} eliminado con éxito`);
-      } catch (error) {
-        console.error(`Error al eliminar el Animal con ID ${id}:`, error);
-      }
+
+  const handleDeleteConfirmation = (animalId) => {
+    setAnimalToDelete(animalId);
+    setShowConfirmDelete(true);
+  };
+
+  const deleteAnimal = async () => {
+    try {
+      await UseApi.deleteAnimal(animalToDelete);
+
+      // Actualizar la lista de productos después de la eliminación
+      setAnimals((prevAnimals) =>
+        prevAnimals.filter((animal) => animal.id !== animalToDelete)
+      );
+
+      setShowConfirmDelete(false);
+    } catch (error) {
+      setErrorMessage(
+        `Error al eliminar el Animal con ID ${animalToDelete}:`,
+        error
+      );
     }
   };
 
@@ -110,33 +115,46 @@ const AnimalsShelter = () => {
     }
   };
 
-
   return (
     <div className="mt-[120px] lg:mt-[100px] w-[90%] m-auto flex flex-col gap-2">
+      {showConfirmDelete && (
+        <ConfirmDeleteModal
+          message="¿Estás seguro de que quieres eliminar este animal de tus registros?"
+          onConfirm={deleteAnimal}
+          onCancel={() => setShowConfirmDelete(false)}
+        />
+      )}
+
       <h2 className="text-2xl text-primaryColor font-bold mb-4">
         Listado de mis Animales
       </h2>
+      {errorMessage && (
+        <div className="text-red-700 bg-red-300 p-3 rounded">
+          {errorMessage}
+        </div>
+      )}
       <div className="flex flex-wrap justify-between">
         <div className="flex items-center w-[70%] gap-4 mb-4">
-        <select
-          value={selectedCategory}
-          onChange={handleProvinceChange}
-          className="p-2 border rounded bg-white"
-        >
-          <option value="">Todas las Categorías</option>
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-        <Search onSearchChange={handleSearchChange} />
+          <select
+            value={selectedCategory}
+            onChange={handleProvinceChange}
+            className="p-2 border rounded bg-white"
+          >
+            <option value="">Todas las Categorías</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <Search onSearchChange={handleSearchChange} />
         </div>
         <Link
           to={`/shelter/registrarAnimal`}
           className="flex items-center gap-2 bg-quarteryColor text-primaryColor font-semibold py-2 px-4 rounded-xl text-center hover:bg-yellow-500 focus:outline-none focus:ring focus:border-yellow-600 self-end"
         >
-          <IoMdAddCircle size={20}/>Registrar Animal
+          <IoMdAddCircle size={20} />
+          Registrar Animal
         </Link>
       </div>
       <div className="overflow-x-auto shadow-sm rounded-xl">
@@ -170,11 +188,34 @@ const AnimalsShelter = () => {
                 </td>
                 <td className="px-4 py-2">{animal.breed}</td>
                 <td className="px-4 py-2">{animal.gender}</td>
-                <td className="px-4 py-2"><span className={`px-1 py-1 text-primaryColor font-semibold rounded-lg ${getStatusColor(animal.status)}`}>{animal.status}</span></td>
+                <td className="px-4 py-2">
+                  <span
+                    className={`px-1 py-1 text-primaryColor font-semibold rounded-lg ${getStatusColor(
+                      animal.status
+                    )}`}
+                  >
+                    {animal.status}
+                  </span>
+                </td>
                 <td className="px-4 py-2 flex my-7">
-                  <Link to={`/shelter/editarAnimal/${animal.id}`} ><FaEdit size={20} className="hover:text-yellow-500 text-secondaryLetterColor mx-1"/></Link>
-                  <button  onClick={() => deleteAnimal(animal.id)}><FaTrashCan size={20} className="hover:text-red-500 mx-1 text-secondaryLetterColor"/></button>
-                  <Link to={`/shelter/verAnimal/${animal.id}`}><BiSolidShow size={24} className="hover:text-blue-500 mx-1 text-secondaryLetterColor"/></Link>
+                  <Link to={`/shelter/editarAnimal/${animal.id}`}>
+                    <FaEdit
+                      size={20}
+                      className="hover:text-yellow-500 text-secondaryLetterColor mx-1"
+                    />
+                  </Link>
+                  <button onClick={() => handleDeleteConfirmation(animal.id)}>
+                    <FaTrashCan
+                      size={20}
+                      className="hover:text-red-500 mx-1 text-secondaryLetterColor"
+                    />
+                  </button>
+                  <Link to={`/shelter/verAnimal/${animal.id}`}>
+                    <BiSolidShow
+                      size={24}
+                      className="hover:text-blue-500 mx-1 text-secondaryLetterColor"
+                    />
+                  </Link>
                 </td>
               </tr>
             ))}
