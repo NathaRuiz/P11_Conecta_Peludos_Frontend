@@ -287,6 +287,20 @@ const UseApi = {
     }
   },
 
+  async userProfileUpdate(data) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(`${apiUrl}/profile/update`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
 
   /*------Consumo de rutas api para el Admin-----*/ 
   async AdminCreateAnimal(data) {

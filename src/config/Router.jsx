@@ -33,6 +33,7 @@ import AdminShelterEdit from "../pages/AdminPages/AdminShelterEdit";
 import AdminEditUser from "../pages/AdminPages/AdminEditUser";
 import AdminPerfil from "../pages/AdminPages/AdminPerfil";
 import ProfileUpdate from "../pages/ShelterPages/ProfileUpdate";
+import UserProfileUpdate from "../pages/UserPages/UserProfileUpdate";
 
 
 const AdminRoute = ({ element }) => {
@@ -90,6 +91,7 @@ const AdminRoute = ({ element }) => {
         {/* Rutas protegidas para User*/}
         <Route path="/user/favoritos" element={<UserRoute element={<><NavbarUser/><Favorites/></>} />} />
         <Route path="/user/perfil" element={<UserRoute element={<><NavbarUser/><UserProfile/></>} />} />
+        <Route path="/user/actualizar/perfil" element={<UserRoute element={<><NavbarUser/><UserProfileUpdate/></>} />} />
         <Route path="/user/contacta/:id" element={<UserRoute element={<><NavbarUser/><Contact/></>} />} />
 
         {/* Rutas protegidas para Shelter*/}

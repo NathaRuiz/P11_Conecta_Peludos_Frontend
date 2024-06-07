@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import UseApi from "../../services/UseApi";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProfileUpdate = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
   const [provinces, setProvinces] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState("");
   const [errorMessage, setErrorMessage] = useState("");

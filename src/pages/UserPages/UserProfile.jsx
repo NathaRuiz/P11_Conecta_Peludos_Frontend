@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UseApi from "../../services/UseApi";
 import ProfileCard from "../../components/cards/ProfileCard";
+import { Link } from "react-router-dom";
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
@@ -51,6 +52,13 @@ const UserProfile = () => {
   return (
     <div className="mt-[120px] lg:mt-[100px] w-[90%] m-auto flex flex-col gap-2 items-center">
         <ProfileCard userData={userData} province={province}/>
+        
+        <Link to="/user/actualizar/perfil">
+          <button className=" text-white bg-gradient-to-r from-primaryColor to-secondaryColor hover:from-primaryColor-light hover:to-secondaryColor-light focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            Editar Información
+          </button>
+        </Link>
+      
     </div>
   )
 }
