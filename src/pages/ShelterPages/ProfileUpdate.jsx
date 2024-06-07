@@ -44,19 +44,18 @@ const ProfileUpdate = () => {
 
   const handleProvinceChange = (e) => {
     const value = parseInt(e.target.value, 10);
-    setSelectedProvince(value); // Asignamos el valor convertido a número
-    setUserData({ ...userData, province_id: value }); // Asignamos el valor convertido a userData
+    setSelectedProvince(value); 
+    setUserData({ ...userData, province_id: value }); 
   };
 
   const handleImageChange = (e) => {
     setErrorMessage("");
     const file = e.target.files[0];
-    // Verificar si el tipo de archivo es una imagen
+    
     if (file.type.startsWith("image/")) {
       setUserData({ ...userData, image_url: file });
       console.log(file.type);
     } else {
-      // Mostrar un mensaje de error si el archivo no es una imagen
       setErrorMessage("El archivo seleccionado no es una imagen.");
     }
   };
