@@ -10,7 +10,7 @@ import { IoMdAddCircle } from "react-icons/io";
 import ConfirmDeleteModal from "../../components/msg/ConfirmDeleteModal";
 
 const AnimalsShelter = () => {
-  const itemsPerPage = 2;
+  const itemsPerPage = 3;
 
   const [animals, setAnimals] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -173,22 +173,22 @@ const AnimalsShelter = () => {
           <tbody>
             {currentAnimals.map((animal) => (
               <tr key={animal.id}>
-                <td className="px-4 py-2">
+                <td className="px-4 py-1">
                   <img
                     src={animal.image_url}
                     alt="animal"
                     style={{ maxWidth: "80px", maxHeight: "80px" }}
                   />
                 </td>
-                <td className="px-4 py-2">{animal.name}</td>
-                <td className="px-4 py-2">
+                <td className="px-4 py-1">{animal.name}</td>
+                <td className="px-4 py-1">
                   {categories.find(
                     (category) => category.id === animal.category_id
                   )?.name || "Desconocida"}
                 </td>
-                <td className="px-4 py-2">{animal.breed}</td>
-                <td className="px-4 py-2">{animal.gender}</td>
-                <td className="px-4 py-2">
+                <td className="px-4 py-1">{animal.breed}</td>
+                <td className="px-4 py-1">{animal.gender}</td>
+                <td className="px-4 py-1">
                   <span
                     className={`px-1 py-1 text-primaryColor font-semibold rounded-lg ${getStatusColor(
                       animal.status
@@ -197,7 +197,7 @@ const AnimalsShelter = () => {
                     {animal.status}
                   </span>
                 </td>
-                <td className="px-4 py-2 flex my-7">
+                <td className="px-4 py-1 flex my-7">
                   <Link to={`/shelter/editarAnimal/${animal.id}`}>
                     <FaEdit
                       size={20}
