@@ -147,7 +147,7 @@ const UseApi = {
   async createAnimal(data) {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(`${apiUrl}/animal/create`, data, {
+      const response = await axios.post(`${apiUrl}/shelter/animal/create`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -175,7 +175,7 @@ const UseApi = {
   async updateAnimal(id, data) {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(`${apiUrl}/animal/update/${id}`, data, {
+      const response = await axios.post(`${apiUrl}/shelter/animal/update/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -189,7 +189,21 @@ const UseApi = {
   async deleteAnimal(id) {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.delete(`${apiUrl}/animal/delete/${id}`, {
+      const response = await axios.delete(`${apiUrl}/shelter/animal/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async profileUpdate(data) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(`${apiUrl}/shelter/profile/update`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

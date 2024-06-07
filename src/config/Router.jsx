@@ -32,6 +32,7 @@ import AdminShelterRegister from "../pages/AdminPages/AdminShelterRegister";
 import AdminShelterEdit from "../pages/AdminPages/AdminShelterEdit";
 import AdminEditUser from "../pages/AdminPages/AdminEditUser";
 import AdminPerfil from "../pages/AdminPages/AdminPerfil";
+import ProfileUpdate from "../pages/ShelterPages/ProfileUpdate";
 
 
 const AdminRoute = ({ element }) => {
@@ -94,6 +95,7 @@ const AdminRoute = ({ element }) => {
         {/* Rutas protegidas para Shelter*/}
         <Route path="/shelter/misAnimales" element={<ShelterRoute element={<><NavbarShelter/><AnimalsShelter/></>} />} />
         <Route path="/shelter/perfil" element={<ShelterRoute element={<><NavbarShelter/><Profile/></>} />} />
+        <Route path="/shelter/actualizar/perfil" element={<ShelterRoute element={<><NavbarShelter/><ProfileUpdate/></>} />} />
         <Route path="/shelter/editarAnimal/:id" element={<ShelterRoute element={<><NavbarShelter/><EditAnimal/></>} />} />
         <Route path="/shelter/registrarAnimal" element={<ShelterRoute element={<><NavbarShelter/><CreateAnimal/></>} />} />
         <Route path="/shelter/verAnimal/:id" element={<ShelterRoute element={<><NavbarShelter/><ShowAnimal/></>} />} />
