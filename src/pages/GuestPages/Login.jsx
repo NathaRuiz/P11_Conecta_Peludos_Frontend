@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UseApi from "../../services/UseApi";
 
-const Login = () => {
+const Login = ({ setRole }) => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
@@ -30,6 +30,8 @@ const Login = () => {
 
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
+
+      setRole(role);
 
       switch (role) {
         case "Admin":

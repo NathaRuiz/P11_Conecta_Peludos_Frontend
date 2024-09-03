@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Adopta from '../pages/GuestPages/Adopta' 
 import Inicio from "../pages/GuestPages/Inicio";
 import InfoAnimal from "../pages/GuestPages/InfoAnimal";
@@ -36,38 +36,36 @@ import ProfileUpdate from "../pages/ShelterPages/ProfileUpdate";
 import UserProfileUpdate from "../pages/UserPages/UserProfileUpdate";
 
 
-const AdminRoute = ({ element }) => {
-    const role = localStorage.getItem('role');
-    return role === 'Admin' ? element : <Navigate to="/accesoDenegado" />;
-  };
-  
-  const UserRoute = ({ element }) => {
-    const role = localStorage.getItem('role');
-    return role === 'User' ? element : <Navigate to="/accesoDenegado" />;
-  };
-  
-  const ShelterRoute = ({ element }) => {
-    const role = localStorage.getItem('role');
-    return role === 'Shelter' ? element : <Navigate to="/accesoDenegado" />;
-  };
-
-  
   const Router = () => {
-    const role = localStorage.getItem('role');
+  
+    const [role, setRole] = useState(localStorage.getItem('role'));
+  
+    useEffect(() => {
+      const handleStorageChange = () => {
+        setRole(localStorage.getItem('role'));
+      };
+  
+      window.addEventListener('storage', handleStorageChange);
+  
+      return () => {
+        window.removeEventListener('storage', handleStorageChange);
+      };
+    }, []);
+  
     let NavBar;
     switch (role) {
-        case 'User':
-            NavBar = NavbarUser;
-            break;
-        case 'Shelter':
-            NavBar = NavbarShelter;
-            break;
-        case 'Admin':
-            NavBar = NavbarAdmin;
-            break;
-        default:
-            NavBar = NavbarGuest;
-            break;
+      case 'User':
+        NavBar = NavbarUser;
+        break;
+      case 'Shelter':
+        NavBar = NavbarShelter;
+        break;
+      case 'Admin':
+        NavBar = NavbarAdmin;
+        break;
+      default:
+        NavBar = NavbarGuest;
+        break;
     }
 
     return (
@@ -76,7 +74,7 @@ const AdminRoute = ({ element }) => {
 
         {/* Rutas publicas */}
         <Route path="/register" element={<><NavbarGuest/><Register/></>}></Route>
-        <Route path="/login" element={<><NavbarGuest/><Login/></>}></Route>
+        <Route path="/login" element={<><NavbarGuest/><Login setRole={setRole} /></>}></Route>
 
         <Route path="/" element={<><NavBar/> <Inicio/></>}></Route> 
         <Route path="/accesoDenegado" element={<><NavBar/><AccessDenied/></>}></Route>
@@ -89,30 +87,30 @@ const AdminRoute = ({ element }) => {
 
           
         {/* Rutas protegidas para User*/}
-        <Route path="/user/favoritos" element={<UserRoute element={<><NavbarUser/><Favorites/></>} />} />
-        <Route path="/user/perfil" element={<UserRoute element={<><NavbarUser/><UserProfile/></>} />} />
-        <Route path="/user/actualizar/perfil" element={<UserRoute element={<><NavbarUser/><UserProfileUpdate/></>} />} />
-        <Route path="/user/contacta/:id" element={<UserRoute element={<><NavbarUser/><Contact/></>} />} />
+        <Route path="/user/favoritos" element={<><NavbarUser/><Favorites/></>} />
+        <Route path="/user/perfil" element={<><NavbarUser/><UserProfile/></>}/>
+        <Route path="/user/actualizar/perfil" element={<><NavbarUser/><UserProfileUpdate/></>} />
+        <Route path="/user/contacta/:id" element={<><NavbarUser/><Contact/></>} />
 
         {/* Rutas protegidas para Shelter*/}
-        <Route path="/shelter/misAnimales" element={<ShelterRoute element={<><NavbarShelter/><AnimalsShelter/></>} />} />
-        <Route path="/shelter/perfil" element={<ShelterRoute element={<><NavbarShelter/><Profile/></>} />} />
-        <Route path="/shelter/actualizar/perfil" element={<ShelterRoute element={<><NavbarShelter/><ProfileUpdate/></>} />} />
-        <Route path="/shelter/editarAnimal/:id" element={<ShelterRoute element={<><NavbarShelter/><EditAnimal/></>} />} />
-        <Route path="/shelter/registrarAnimal" element={<ShelterRoute element={<><NavbarShelter/><CreateAnimal/></>} />} />
-        <Route path="/shelter/verAnimal/:id" element={<ShelterRoute element={<><NavbarShelter/><ShowAnimal/></>} />} />
+        <Route path="/shelter/misAnimales" element={<><NavbarShelter/><AnimalsShelter/></>} />
+        <Route path="/shelter/perfil" element={<><NavbarShelter/><Profile/></>} />
+        <Route path="/shelter/actualizar/perfil" element={<><NavbarShelter/><ProfileUpdate/></>} />
+        <Route path="/shelter/editarAnimal/:id" element={<><NavbarShelter/><EditAnimal/></>} />
+        <Route path="/shelter/registrarAnimal" element={<><NavbarShelter/><CreateAnimal/></>} />
+        <Route path="/shelter/verAnimal/:id" element={<><NavbarShelter/><ShowAnimal/></>} />
 
         {/* Rutas protegidas para el Admin*/}
-        <Route path="/admin/perfil" element={<AdminRoute element={<><NavbarAdmin/><AdminPerfil/></>} />} />
-        <Route path="/admin/animales" element={<AdminRoute element={<><NavbarAdmin/><Animales/></>} />} />
-        <Route path="/admin/create/animal" element={<AdminRoute element={<><NavbarAdmin/><AdminCreateAnimal/></>} />} />
-        <Route path="/admin/edit/animal/:id" element={<AdminRoute element={<><NavbarAdmin/><AdminEditAnimal/></>} />} />
-        <Route path="/admin/usuarios" element={<AdminRoute element={<><NavbarAdmin/><Users/></>} />} />
-        <Route path="/admin/registrarUsuario" element={<AdminRoute element={<><NavbarAdmin/><AdminUserRegister/></>} />} />
-        <Route path="/admin/editar/user/:id" element={<AdminRoute element={<><NavbarAdmin/><AdminEditUser/></>} />} />
-        <Route path="/admin/protectoras&refugios" element={<AdminRoute element={<><NavbarAdmin/><AdminShelters/></>} />} />
-        <Route path="/admin/registrar/p&r" element={<AdminRoute element={<><NavbarAdmin/><AdminShelterRegister/></>} />} />
-        <Route path="/admin/editar/p&r/:id" element={<AdminRoute element={<><NavbarAdmin/><AdminShelterEdit/></>} />} />
+        <Route path="/admin/perfil" element={<><NavbarAdmin/><AdminPerfil/></>} />
+        <Route path="/admin/animales" element={<><NavbarAdmin/><Animales/></>} />
+        <Route path="/admin/create/animal" element={<><NavbarAdmin/><AdminCreateAnimal/></>} />
+        <Route path="/admin/edit/animal/:id" element={<><NavbarAdmin/><AdminEditAnimal/></>} />
+        <Route path="/admin/usuarios" element={<><NavbarAdmin/><Users/></>} />
+        <Route path="/admin/registrarUsuario" element={<><NavbarAdmin/><AdminUserRegister/></>} />
+        <Route path="/admin/editar/user/:id" element={<><NavbarAdmin/><AdminEditUser/></>} />
+        <Route path="/admin/protectoras&refugios" element={<><NavbarAdmin/><AdminShelters/></>} />
+        <Route path="/admin/registrar/p&r" element={<><NavbarAdmin/><AdminShelterRegister/></>} />
+        <Route path="/admin/editar/p&r/:id" element={<><NavbarAdmin/><AdminShelterEdit/></>} />
       
     </Routes>
 </BrowserRouter>
