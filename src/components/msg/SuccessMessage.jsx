@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaRegCheckCircle } from 'react-icons/fa';
 
-const Message = ({message}) => {
+const SuccessMessage = ({message}) => {
 
   return (
     <div className="fixed inset-0 z-10 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none">
@@ -19,4 +19,4 @@ const Message = ({message}) => {
   )
 }
 
-export default Message
+export default SuccessMessage

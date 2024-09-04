@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UseApi from "../../services/UseApi";
-import Message from "../../components/msg/Message";
+import Message from "../../components/msg/SuccessMessage";
 
 const CreateAnimal = () => {
   const navigate = useNavigate();
@@ -84,7 +84,7 @@ const CreateAnimal = () => {
           {errorMessage}
         </div>
       )}
-      {successMessage && <Message message={successMessage} />}
+      {successMessage && <SuccessMessage message={successMessage} />}
 
       <h2 className="text-2xl font-semibold text-primaryColor mb-6">
         Crear Nuevo Animal

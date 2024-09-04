@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import UseApi from "../../services/UseApi";
-import Message from "../../components/msg/Message";
+import SuccessMessage from "../../components/msg/SuccessMessage";
 
 const EditAnimal = () => {
   const { id } = useParams();
@@ -96,7 +96,7 @@ const EditAnimal = () => {
           {errorMessage}
         </div>
       )}
-      {successMessage && <Message message={successMessage} />}
+      {successMessage && <SuccessMessage message={successMessage} />}
 
       <h2 className="text-2xl font-semibold text-primaryColor mb-6">
         Editar Animal
