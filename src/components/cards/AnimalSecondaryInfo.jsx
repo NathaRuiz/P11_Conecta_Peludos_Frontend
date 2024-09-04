@@ -34,7 +34,10 @@ const AnimalSecondaryInfo = ({ animal }) => {
       const userRole = localStorage.getItem('role');
 
       if (!token || userRole !== 'User') {
-        setShowRegisterMessage(true);
+        setShowRegisterMessage(false); 
+        setTimeout(() => {
+          setShowRegisterMessage(true);
+        }, 0);
         return;
       }
 
@@ -56,7 +59,10 @@ const AnimalSecondaryInfo = ({ animal }) => {
       const userRole = localStorage.getItem('role');
 
       if (!token || userRole !== 'User') {
-        setShowRegisterMessage(true);
+        setShowRegisterMessage(false); 
+        setTimeout(() => {
+          setShowRegisterMessage(true);
+        }, 0);
         return;
       }
       navigate(`/user/contacta/${animal.id}`);
