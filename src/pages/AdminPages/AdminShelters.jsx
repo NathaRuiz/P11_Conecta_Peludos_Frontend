@@ -7,6 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import { BiSolidShow } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
+import ConfirmDeleteModal from "../../components/msg/ConfirmDeleteModal";
 
 const AdminShelters = () => {
   const itemsPerPage = 4;
@@ -17,6 +18,9 @@ const AdminShelters = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [shelterToDelete, setShelterToDelete] = useState(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,31 +76,38 @@ const AdminShelters = () => {
   const endIndex = startIndex + itemsPerPage;
 
   const currentShelters = filteredShelters.slice(startIndex, endIndex);
-  const deleteShelter = async (id) => {
-    const confirmDelete = window.confirm(
-      "¿Estás seguro de que quieres eliminar esta Protectora/Refugio?"
-    );
 
-    if (confirmDelete) {
-      try {
-        await UseApi.deleteUser(id);
-
-        setShelters((prevShelters) =>
-          prevShelters.filter((shelter) => shelter.id !== id)
-        );
-
-        console.log(`Provincia/Refugio con ID ${id} eliminado con éxito`);
-      } catch (error) {
-        console.error(
-          `Error al eliminar el Provincia/Refugio con ID ${id}:`,
-          error
-        );
-      }
-    }
+  const handleDeleteShelterConfirmation = (shelterId) => {
+    setShelterToDelete(shelterId);
+    setShowConfirmDelete(true);   
   };
 
+  const deleteShelter = async () => {
+    try {
+      await UseApi.deleteUser(shelterToDelete);
+
+      // Actualizar la lista de productos después de la eliminación
+      setShelters((prevShelter) =>
+       prevShelter.filter((shelter) => shelter.id !== shelterToDelete)
+     );
+
+      setShowConfirmDelete(false);
+    } catch (error) {
+      setErrorMessage(
+        `Error al eliminar la protectora/refugio con ID ${shelterToDelete}:`,
+        error
+      );
+    }
+  };
   return (
     <div className="mt-[120px] lg:mt-[100px] w-[90%] m-auto flex flex-col gap-2">
+      {showConfirmDelete && (
+        <ConfirmDeleteModal
+          message="¿Estás seguro de que quieres eliminar ésta protectora/refugio de tus registros?"
+          onConfirm={deleteShelter}
+          onCancel={() => setShowConfirmDelete(false)}
+        />
+      )}
       <h2 className="text-2xl text-primaryColor font-bold mb-4">
         Listado de Pretectoras y Refugios
       </h2>
@@ -169,7 +180,7 @@ const AdminShelters = () => {
                       className="hover:text-yellow-500 text-secondaryLetterColor mx-1"
                     />
                   </Link>
-                  <button onClick={() => deleteShelter(shelter.id)}>
+                  <button onClick={() => handleDeleteShelterConfirmation(shelter.id)}>
                     <FaTrashCan
                       size={20}
                       className="hover:text-red-500 mx-1 text-secondaryLetterColor"

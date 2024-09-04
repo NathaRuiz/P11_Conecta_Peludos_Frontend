@@ -7,6 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import { BiSolidShow } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
+import ConfirmDeleteModal from "../../components/msg/ConfirmDeleteModal";
 
 const Animales = () => {
   const itemsPerPage = 4;
@@ -17,6 +18,8 @@ const Animales = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [animalToDelete, setAnimalToDelete] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,24 +75,25 @@ const Animales = () => {
   const endIndex = startIndex + itemsPerPage;
 
   const currentAnimals = filteredAnimals.slice(startIndex, endIndex);
-  const deleteAnimal = async (id) => {
-    
-    const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar este animal de los registros?");
-  
-    if (confirmDelete) {
-      try {
-        
-        await UseApi.AdminDeleteAnimal(id);
-  
-       
-        setAnimals((prevAnimals) =>
-        prevAnimals.filter((animal) => animal.id !== id)
-        );
-        
-        console.log(`Animal con ID ${id} eliminado con éxito`);
-      } catch (error) {
-        console.error(`Error al eliminar el Animal con ID ${id}:`, error);
-      }
+  const handleDeleteAnimalConfirmation = (animalId) => {
+    setAnimalToDelete(animalId);
+    setShowConfirmDelete(true);   
+  };
+  const deleteAnimal = async () => {
+    try {
+      await UseApi.AdminDeleteAnimal(animalToDelete);
+
+      // Actualizar la lista de productos después de la eliminación
+      setAnimals((prevAnimals) =>
+        prevAnimals.filter((animal) => animal.id !== animalToDelete)
+      );
+
+      setShowConfirmDelete(false);
+    } catch (error) {
+      setErrorMessage(
+        `Error al eliminar el Animal con ID ${animalToDelete}:`,
+        error
+      );
     }
   };
 
@@ -113,6 +117,13 @@ const Animales = () => {
 
   return (
     <div className="mt-[120px] lg:mt-[100px] w-[90%] m-auto flex flex-col gap-2">
+       {showConfirmDelete && (
+        <ConfirmDeleteModal
+          message="¿Estás seguro de que quieres eliminar este animal de tus registros?"
+          onConfirm={deleteAnimal}
+          onCancel={() => setShowConfirmDelete(false)}
+        />
+      )}
       <h2 className="text-2xl text-primaryColor font-bold mb-4">
         Listado de los Animales
       </h2>
@@ -173,7 +184,7 @@ const Animales = () => {
                 <td className="px-4 py-2"><span className={`px-1 py-1 text-primaryColor font-semibold rounded-lg ${getStatusColor(animal.status)}`}>{animal.status}</span></td>
                 <td className="px-4 py-2 flex my-7">
                   <Link to={`/admin/edit/animal/${animal.id}`} ><FaEdit size={20} className="hover:text-yellow-500 text-secondaryLetterColor mx-1"/></Link>
-                  <button  onClick={() => deleteAnimal(animal.id)}><FaTrashCan size={20} className="hover:text-red-500 mx-1 text-secondaryLetterColor"/></button>
+                  <button  onClick={() => handleDeleteAnimalConfirmation(animal.id)}><FaTrashCan size={20} className="hover:text-red-500 mx-1 text-secondaryLetterColor"/></button>
                   <Link to={`/animal/${animal.id}`}><BiSolidShow size={24} className="hover:text-blue-500 mx-1 text-secondaryLetterColor"/></Link>
                 </td>
               </tr>

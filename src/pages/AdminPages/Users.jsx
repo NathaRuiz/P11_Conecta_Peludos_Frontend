@@ -7,6 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import { BiSolidShow } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
+import ConfirmDeleteModal from "../../components/msg/ConfirmDeleteModal";
 
 
 const Users = () => {
@@ -18,6 +19,9 @@ const Users = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,31 +77,40 @@ const Users = () => {
   const endIndex = startIndex + itemsPerPage;
 
   const currentUsers = filteredUsers.slice(startIndex, endIndex);
-  const deleteUser = async (id) => {
-    const confirmDelete = window.confirm(
-      "¿Estás seguro de que quieres eliminar este Usuario?"
-    );
+  
+  const handleDeleteUserConfirmation = (userId) => {
+    setUserToDelete(userId);
+    setShowConfirmDelete(true);   
+  };
 
-    if (confirmDelete) {
-      try {
-        await UseApi.deleteUser(id);
+  const deleteUser = async () => {
+    try {
+      await UseApi.deleteUser(userToDelete);
 
-        setUser((prevUsers) =>
-          prevUsers.filter((user) => user.id !== id)
-        );
+      // Actualizar la lista de productos después de la eliminación
+      setUser((prevUsers) =>
+       prevUsers.filter((user) => user.id !== userToDelete)
+     );
 
-        console.log(`Usuario con ID ${id} eliminado con éxito`);
-      } catch (error) {
-        console.error(
-          `Error al eliminar el Usuario con ID ${id}:`,
-          error
-        );
-      }
+      setShowConfirmDelete(false);
+    } catch (error) {
+      setErrorMessage(
+        `Error al eliminar el usuario con ID ${userToDelete}:`,
+        error
+      );
     }
   };
 
+
   return (
     <div className="mt-[120px] lg:mt-[100px] w-[90%] m-auto flex flex-col gap-2">
+       {showConfirmDelete && (
+        <ConfirmDeleteModal
+          message="¿Estás seguro de que quieres eliminar este usuario de tus registros?"
+          onConfirm={deleteUser}
+          onCancel={() => setShowConfirmDelete(false)}
+        />
+      )}
       <h2 className="text-2xl text-primaryColor font-bold mb-4">
         Listado de Usuarios
       </h2>
@@ -162,7 +175,7 @@ const Users = () => {
                       className="hover:text-yellow-500 text-secondaryLetterColor mx-1"
                     />
                   </Link>
-                  <button onClick={() => deleteUser(user.id)}>
+                  <button onClick={() => handleDeleteUserConfirmation(user.id)}>
                     <FaTrashCan
                       size={20}
                       className="hover:text-red-500 mx-1 text-secondaryLetterColor"
