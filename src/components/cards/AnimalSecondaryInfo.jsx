@@ -3,6 +3,7 @@ import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { Link } from "react-router-dom";
 import UseApi from "../../services/UseApi";
 import { useNavigate } from "react-router-dom";
+import DismissingInfo from "../msg/DismissingInfo";
 
 const AnimalSecondaryInfo = ({ animal }) => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const AnimalSecondaryInfo = ({ animal }) => {
       try {
         const token = localStorage.getItem("token");
         const userRole = localStorage.getItem("role");
-    
+
         if (token && userRole === "User") {
           const favorites = await UseApi.getFavorites();
           setIsFavorite(favorites.some((favorite) => favorite.id === animal.id));
@@ -28,11 +29,10 @@ const AnimalSecondaryInfo = ({ animal }) => {
   }, [animal.id]);
 
   const toggleFavorite = async () => {
-    
     try {
       const token = localStorage.getItem('token');
       const userRole = localStorage.getItem('role');
-      
+
       if (!token || userRole !== 'User') {
         setShowRegisterMessage(true);
         return;
@@ -47,39 +47,44 @@ const AnimalSecondaryInfo = ({ animal }) => {
       setIsFavorite(!isFavorite);
     } catch (error) {
       console.error('Error al cambiar el estado de favorito:', error);
-     
     }
-  };
-
-  const handleRegisterMessageClick = () => {
-    // Ocultar el mensaje de registro al hacer clic en él
-    setShowRegisterMessage(false);
   };
 
   const handleEstoyInteresado = async () => {
     try {
       const token = localStorage.getItem('token');
       const userRole = localStorage.getItem('role');
-      
+
       if (!token || userRole !== 'User') {
         setShowRegisterMessage(true);
         return;
       }
       navigate(`/user/contacta/${animal.id}`);
-
     } catch (error) {
       console.error('Error al manejar la acción de "Estoy Interesado":', error);
     }
   };
 
+  
+  useEffect(() => {
+    if (showRegisterMessage) {
+      const timer = setTimeout(() => {
+        setShowRegisterMessage(false);
+      }, 7000);
+
+      return () => clearTimeout(timer); 
+    }
+  }, [showRegisterMessage]);
+
   return (
     <>
       <div className="flex flex-col justify-between gap-4 lg:w-3/4 w-[90%] bg-white rounded-lg overflow-hidden shadow-md p-4 mb-4">
-      {showRegisterMessage && (
-        <div className="absolute bottom-0 w-[80%] lg:w-[50%] bg-red-500 text-white py-2 px-4 text-center" onClick={handleRegisterMessageClick}>
-          Por favor, regístrate como usuario para poder acceder a estas funciones.¡Es gratis y solo toma un minuto!
-        </div>
-      )}
+        {showRegisterMessage && (
+          <DismissingInfo 
+            message={"Por favor, regístrate como usuario para poder acceder a estas funciones.¡Es gratis y solo toma un minuto!"}
+            type="info"
+          />
+        )}
         <h3 className="font-bold text-primaryColor text-md">Mi Historia</h3>
         <div className="text-primaryColor text-sm">{animal.my_story}</div>
         <h3 className="font-bold text-primaryColor text-md">¿Cómo soy?</h3>
@@ -99,7 +104,8 @@ const AnimalSecondaryInfo = ({ animal }) => {
               <MdFavoriteBorder className="size-8 lg:size-6" />
             )}
           </span>
-          <button onClick={handleEstoyInteresado}
+          <button
+            onClick={handleEstoyInteresado}
             className="rounded-full px-3 py-1 lg:text-xs text-sm font-semibold text-white bg-primaryColor"
           >
             Estoy Interesado
