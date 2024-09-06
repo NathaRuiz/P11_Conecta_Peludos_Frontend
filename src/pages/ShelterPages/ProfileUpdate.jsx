@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import UseApi from "../../services/UseApi";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +7,7 @@ const ProfileUpdate = () => {
   const [provinces, setProvinces] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const errorRef = useRef(null);
 
   const [userData, setUserData] = useState({
     name: "",
@@ -34,7 +35,15 @@ const ProfileUpdate = () => {
     };
 
     fetchProvinces();
-  }, [id]);
+  }, []);
+
+
+  useEffect(() => {
+    if (errorMessage) {
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    }
+  }, [errorMessage]);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,8 +59,13 @@ const ProfileUpdate = () => {
   const handleImageChange = (e) => {
     setErrorMessage("");
     const file = e.target.files[0];
-    
-    if (file.type.startsWith("image/")) {
+
+    if (file && file.type.startsWith("image/")) {
+     
+      if (file.size > 2 * 1024 * 1024) {
+        setErrorMessage("El archivo de imagen es muy grande. El tamaño máximo permitido es de 2 MB.");
+        return;  
+      }
       setUserData({ ...userData, image_url: file });
       console.log(file.type);
     } else {
@@ -71,14 +85,15 @@ const ProfileUpdate = () => {
       const response = await UseApi.profileUpdate(formData);
       navigate(`/shelter/perfil`);
     } catch (error) {
-      setErrorMessage("Error al actualizar la información:");
+        setErrorMessage("Error al actualizar la información. Por favor intentelo de nuevo más tarde.");
     }
   };
+
 
   return (
     <div className="mt-[120px] lg:mt-[100px] w-[90%] lg:w-[50%] mx-auto bg-white rounded-lg overflow-hidden shadow-lg p-6">
       {errorMessage && (
-        <div className="text-red-700 bg-red-300 p-3 rounded">
+        <div ref={errorRef} className="text-red-700 bg-red-300 p-3 rounded mb-4">
           {errorMessage}
         </div>
       )}

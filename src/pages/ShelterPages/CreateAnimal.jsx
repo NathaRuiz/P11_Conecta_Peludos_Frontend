@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import UseApi from "../../services/UseApi";
-import Message from "../../components/msg/SuccessMessage";
+import SuccessMessage from "../../components/msg/SuccessMessage";
 
 const CreateAnimal = () => {
   const navigate = useNavigate();
@@ -23,7 +23,8 @@ const CreateAnimal = () => {
   const [categories, setCategories] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-  const [loading, setLoading] = useState(false); // Estado de carga
+  const [loading, setLoading] = useState(false); 
+  const errorRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,20 +42,37 @@ const CreateAnimal = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (errorMessage) {
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    }
+  }, [errorMessage]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleImageChange = (e) => {
-    setFormData({ ...formData, image_url: e.target.files[0] });
+    setErrorMessage(""); 
+    const file = e.target.files[0];
+
+    if (file) {
+      if (!file.type.startsWith("image/")) {
+        setErrorMessage("El archivo seleccionado no es una imagen.");
+      } else if (file.size > 2 * 1024 * 1024) { 
+        setErrorMessage("El archivo de imagen es muy grande. El tamaño máximo permitido es de 2 MB.");
+      } else {
+        setFormData({ ...formData, image_url: file });
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (loading) return; // Evitar múltiples envíos si ya se está cargando
+    if (loading) return; 
 
-    setLoading(true); // Establecer el estado de carga a true al enviar la solicitud
+    setLoading(true); 
 
     const formDataToSend = new FormData();
     for (const key in formData) {
@@ -73,14 +91,14 @@ const CreateAnimal = () => {
         "Error al crear animal, por favor verifique el formato de imagen o inténtalo de nuevo más tarde."
       );
     }finally {
-      setLoading(false); // Restaurar el estado de carga a false después de completar la solicitud
+      setLoading(false); 
     }
   };
 
   return (
     <div className=" lg:mt-[100px] gap-1 mt-[120px] w-[90%] mx-auto bg-white rounded-lg overflow-hidden shadow-lg p-6 mb-5">
-      {errorMessage && (
-        <div className="text-red-700 bg-red-300 p-3 mb-3 rounded">
+       {errorMessage && (
+        <div ref={errorRef} className="text-red-700 bg-red-300 p-3 rounded mb-4">
           {errorMessage}
         </div>
       )}
