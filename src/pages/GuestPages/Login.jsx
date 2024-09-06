@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UseApi from "../../services/UseApi";
 
@@ -11,6 +11,7 @@ const Login = ({ setRole }) => {
   });
 
   const [errorMessage, setErrorMessage] = useState("");
+  const errorRef = useRef(null);
 
   const handleChange = (e) => {
     setCredentials({
@@ -18,6 +19,12 @@ const Login = ({ setRole }) => {
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    if (errorMessage) {
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    }
+  }, [errorMessage]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,8 +68,8 @@ const Login = ({ setRole }) => {
 
   return (
     <div className="mt-[120px] lg:mt-[100px] flex flex-col gap-2">
-      {errorMessage && (
-        <div className="text-red-700 bg-red-300 p-3 rounded">
+       {errorMessage && (
+        <div ref={errorRef} className="text-red-700 bg-red-300 p-3 rounded mb-4">
           {errorMessage}
         </div>
       )}
