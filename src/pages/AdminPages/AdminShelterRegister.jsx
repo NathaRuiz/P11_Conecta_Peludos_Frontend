@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import UseApi from "../../services/UseApi";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +8,7 @@ const AdminShelterRegister = () => {
   const [selectedProvince, setSelectedProvince] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const errorRef = useRef(null);
 
   useEffect(() => {
     const fetchProvinces = async () => {
@@ -21,6 +22,12 @@ const AdminShelterRegister = () => {
 
     fetchProvinces();
   }, []);
+
+  useEffect(() => {
+    if (errorMessage) {
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    }
+  }, [errorMessage]);
 
   const [userData, setUserData] = useState({
     role_id: 3,
@@ -58,17 +65,21 @@ const AdminShelterRegister = () => {
   };
 
   const handleImageChange = (e) => {
-    setErrorMessage('');
+    setErrorMessage(""); 
     const file = e.target.files[0];
-    // Verificar si el tipo de archivo es una imagen
-    if (file.type.startsWith('image/')) {
-      setUserData({ ...userData, image_url: file });
-      console.log(file.type)
-    } else {
-      // Mostrar un mensaje de error si el archivo no es una imagen
-      setErrorMessage("El archivo seleccionado no es una imagen.");
+
+    if (file) {
+      if (!file.type.startsWith("image/")) {
+        setErrorMessage("El archivo seleccionado no es una imagen.");
+      } else if (file.size > 2 * 1024 * 1024) { 
+        setErrorMessage("El archivo de imagen es muy grande. El tamaño máximo permitido es de 2 MB.");
+      } else {
+        setFormData({ ...formData, image_url: file });
+      }
     }
   };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -111,7 +122,7 @@ const AdminShelterRegister = () => {
   return (
     <div className="mt-[120px] lg:mt-[100px] w-[90%] lg:w-[50%] mx-auto bg-white rounded-lg overflow-hidden shadow-lg p-6">
       {errorMessage && (
-        <div className="text-red-700 bg-red-300 p-3 rounded">
+        <div ref={errorRef} className="text-red-700 bg-red-300 p-3 rounded mb-4">
           {errorMessage}
         </div>
       )}

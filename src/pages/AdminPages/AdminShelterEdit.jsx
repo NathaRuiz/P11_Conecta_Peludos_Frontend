@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import UseApi from "../../services/UseApi";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -8,6 +8,7 @@ const AdminShelterEdit = () => {
   const [provinces, setProvinces] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const errorRef = useRef(null);
 
   const [userData, setUserData] = useState({
     name: "",
@@ -37,6 +38,12 @@ const AdminShelterEdit = () => {
     fetchProvinces();
   }, [id]);
 
+  useEffect(() => {
+    if (errorMessage) {
+      errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    }
+  }, [errorMessage]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
@@ -49,15 +56,17 @@ const AdminShelterEdit = () => {
   };
 
   const handleImageChange = (e) => {
-    setErrorMessage("");
+    setErrorMessage(""); 
     const file = e.target.files[0];
-    // Verificar si el tipo de archivo es una imagen
-    if (file.type.startsWith("image/")) {
-      setUserData({ ...userData, image_url: file });
-      console.log(file.type);
-    } else {
-      // Mostrar un mensaje de error si el archivo no es una imagen
-      setErrorMessage("El archivo seleccionado no es una imagen.");
+
+    if (file) {
+      if (!file.type.startsWith("image/")) {
+        setErrorMessage("El archivo seleccionado no es una imagen.");
+      } else if (file.size > 2 * 1024 * 1024) { 
+        setErrorMessage("El archivo de imagen es muy grande. El tamaño máximo permitido es de 2 MB.");
+      } else {
+        setFormData({ ...formData, image_url: file });
+      }
     }
   };
 
@@ -80,7 +89,7 @@ const AdminShelterEdit = () => {
   return (
     <div className="mt-[120px] lg:mt-[100px] w-[90%] lg:w-[50%] mx-auto bg-white rounded-lg overflow-hidden shadow-lg p-6">
       {errorMessage && (
-        <div className="text-red-700 bg-red-300 p-3 rounded">
+        <div ref={errorRef} className="text-red-700 bg-red-300 p-3 rounded mb-4">
           {errorMessage}
         </div>
       )}

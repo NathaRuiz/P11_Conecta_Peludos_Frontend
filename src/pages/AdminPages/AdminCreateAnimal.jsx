@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import UseApi from "../../services/UseApi";
 
@@ -22,6 +22,7 @@ const AdminCreateAnimal = () => { const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
     const [shelters, setShelters] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null);
+    const errorRef = useRef(null);
   
     useEffect(() => {
       const fetchData = async () => {
@@ -43,13 +44,30 @@ const AdminCreateAnimal = () => { const navigate = useNavigate();
       fetchData();
     }, []);
   
+    useEffect(() => {
+      if (errorMessage) {
+        errorRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+      }
+    }, [errorMessage]);
+
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFormData({ ...formData, [name]: value });
     };
   
     const handleImageChange = (e) => {
-      setFormData({ ...formData, image_url: e.target.files[0] });
+      setErrorMessage(""); 
+      const file = e.target.files[0];
+  
+      if (file) {
+        if (!file.type.startsWith("image/")) {
+          setErrorMessage("El archivo seleccionado no es una imagen.");
+        } else if (file.size > 2 * 1024 * 1024) { 
+          setErrorMessage("El archivo de imagen es muy grande. El tamaño máximo permitido es de 2 MB.");
+        } else {
+          setFormData({ ...formData, image_url: file });
+        }
+      }
     };
   
     const handleSubmit = async (e) => {
@@ -73,11 +91,11 @@ const AdminCreateAnimal = () => { const navigate = useNavigate();
   
     return (
       <div className=" lg:mt-[100px] gap-1 mt-[120px] w-[90%] mx-auto bg-white rounded-lg overflow-hidden shadow-lg p-6 mb-5">
-        {errorMessage && (
-          <div className="text-red-700 bg-red-300 p-3 rounded">
-            {errorMessage}
-          </div>
-        )}
+         {errorMessage && (
+        <div ref={errorRef} className="text-red-700 bg-red-300 p-3 rounded mb-4">
+          {errorMessage}
+        </div>
+      )}
   
         <h2 className="text-2xl font-semibold text-primaryColor mb-6">
           Crear Nuevo Animal

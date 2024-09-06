@@ -106,7 +106,7 @@ const Users = () => {
     <div className="mt-[120px] lg:mt-[100px] w-[90%] m-auto flex flex-col gap-2">
        {showConfirmDelete && (
         <ConfirmDeleteModal
-          message="¿Estás seguro de que quieres eliminar este usuario de tus registros?"
+          message="¿Estás seguro de que quieres eliminar éste usuario de tus registros?"
           onConfirm={deleteUser}
           onCancel={() => setShowConfirmDelete(false)}
         />
